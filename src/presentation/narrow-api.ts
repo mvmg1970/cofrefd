@@ -8,8 +8,8 @@ export type NarrowApiInput = {
 };
 
 export type NarrowApiOutput = {
-  readonly status: \"sucesso\" | \"erro\";
-  readonly veredito?: \"autorizado\" | \"negado\";
+  readonly status: "sucesso" | "erro";
+  readonly veredito?: "autorizado" | "negado";
   readonly erroCodigo?: string;
   readonly timestamp: string;
 };
@@ -18,8 +18,8 @@ export type NarrowApiOutput = {
  * Adaptador de Entrada (Primary Adapter) representando a Narrow API do Cofre.
  * 
  * Ela é o único ponto de contato externo (API estreita) pelo qual o FD-Core solicita
- * processamento ao cofre. Ela recebe apenas referências lógicas opacas [3, 8].
- * O plaintext do ativo lógico protegido nunca trafega ou é exposto pelas bordas desta API [3, 8].
+ * processamento ao cofre. Ela recebe apenas referências lógicas opacas.
+ * O plaintext do ativo lógico protegido nunca trafega ou é exposto pelas bordas desta API.
  */
 export class NarrowApi {
   constructor(private readonly processarAtivo: ProcessarAtivo) {}
@@ -32,16 +32,16 @@ export class NarrowApi {
 
     const timestamp = new Date().toISOString();
 
-    if (result.kind === \"failure\") {
+    if (result.kind === "failure") {
       return {
-        status: \"erro\",
+        status: "erro",
         erroCodigo: result.error.kind,
         timestamp,
       };
     }
 
     return {
-      status: \"sucesso\",
+      status: "sucesso",
       veredito: result.value.veredito,
       timestamp,
     };

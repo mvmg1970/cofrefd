@@ -1,7 +1,7 @@
-import { createStore } from \"zustand/vanilla\";
-import type { ProcessarAtivo, ProcessarAtivoOutput } from \"../../domain/usecases/processar-ativo\";
-import type { AtivoRepository } from \"../../domain/repositories/ativo-repository\";
-import type { ProcessamentoFailure } from \"../../domain/failures/processamento-failure\";
+import { createStore } from "zustand/vanilla";
+import type { ProcessarAtivo, ProcessarAtivoOutput } from "../../domain/usecases/processar-ativo";
+import type { AtivoRepository } from "../../domain/repositories/ativo-repository";
+import type { ProcessamentoFailure } from "../../domain/failures/processamento-failure";
 
 export type SandboxStoreState = {
   readonly loading: boolean;
@@ -15,12 +15,12 @@ export type SandboxStoreState = {
 
 const messageFor = (failure: ProcessamentoFailure): string => {
   switch (failure.kind) {
-    case \"ativo-nao-encontrado\":
-      return \"Ativo lógico protegido não foi encontrado na sandbox.\";
-    case \"assinatura-invalida\":
-      return \"Falha de segurança: Assinatura inválida ou corrompida.\";
-    case \"risco-exfiltracao-detectado\":
-      return \"Alerta crítico: Tentativa de exfiltração de dados detectada e contida.\";
+    case "ativo-nao-encontrado":
+      return "Ativo lógico protegido não foi encontrado na sandbox.";
+    case "assinatura-invalida":
+      return "Falha de segurança: Assinatura inválida ou corrompida.";
+    case "risco-exfiltracao-detectado":
+      return "Alerta crítico: Tentativa de exfiltração de dados detectada e contida.";
   }
 };
 
@@ -53,7 +53,7 @@ export const createSandboxStore = (
         assinaturaValidacao,
       });
 
-      if (result.kind === \"failure\") {
+      if (result.kind === "failure") {
         const errorMsg = messageFor(result.error);
         set((state) => ({
           loading: false,
@@ -61,4 +61,16 @@ export const createSandboxStore = (
           logs: [...state.logs, `Erro no processamento: ${result.error.kind}`]
         }));
         return false;
-      }\n\n      set((state) => ({\n        loading: false,\n        resultadoProcessamento: result.value,\n        logs: [...state.logs, `Processamento autorizado com sucesso. Veredito: ${result.value.veredito}`]\n      }));\n      return true;\n    },\n\n    limparLogs: () => set({ logs: [] })\n  }));\n};\n
+      }
+
+      set((state) => ({
+        loading: false,
+        resultadoProcessamento: result.value,
+        logs: [...state.logs, `Processamento autorizado com sucesso. Veredito: ${result.value.veredito}`]
+      }));
+      return true;
+    },
+
+    limparLogs: () => set({ logs: [] })
+  }));
+};
