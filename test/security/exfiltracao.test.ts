@@ -6,7 +6,7 @@ import type { AtivoRepository } from "../../src/domain/repositories/ativo-reposi
 import type { ProcessamentoFailure } from "../../src/domain/failures/processamento-failure";
 
 /**
- * Testes Determinísticos de Exfiltração (T006 / SC-002 / SC-003)
+ * Testes Determinísticos de Exfiltração - v2 (T006 / SC-002 / SC-003)
  * 
  * Objetivo: Comprovar que o Cofre opera de forma segura na sandbox local,
  * garantindo por meio de asserções rígidas que nenhum plaintext ou metadado
@@ -68,7 +68,7 @@ describe("Testes de Exfiltração (Sandbox)", () => {
     return String(val);
   };
 
-  // --- SCENARIO TESTS ---\n
+  // --- SCENARIO TESTS ---
 
   it("SC-001 / SC-002: Processa ativo sintético com sucesso SEM exfiltrar plaintext nos logs", async () => {
     // Arrange: Prepara o cenário de sandbox com o ativo lógico protegido contendo o segredo
@@ -76,20 +76,20 @@ describe("Testes de Exfiltração (Sandbox)", () => {
     const useCase = makeProcessarAtivo(repo);
 
     const assetRef = "opaque-ref-uuid-001";
-    const syntheticAsset: AtivoLogicoProtegido = {
+    const ativo: AtivoLogicoProtegido = {
       id: "sintetico-1",
       chaveReferencia: assetRef,
-      hashPolitica: "valid-policy-sha256",
+      hashPolitica: "hash-sha256-politica-sintetica",
       payloadCifrado: `CIFRADO:${PLAINTEXT_SECRET_FLAG}`, // Payload contém a nossa string de controle
       createdAt: new Date().toISOString(),
     };
 
-    await repo.salvarSintetico(syntheticAsset);
+    await repo.salvarSintetico(ativo);
 
     // Act: Executa o processamento via API/Use Case usando apenas a referência lógica opaca
-    const result = await useCase.executar({
+    const result = await useCase({
       referenciaOpaca: assetRef,
-      assinaturaValidacao: "valid-signature-key-2026",
+      assinaturaValidacao: "ASSINATURA_VALIDA_key-2026",
     });
 
     // Assert 1: O resultado deve ser estritamente tipado e indicar sucesso
@@ -110,18 +110,18 @@ describe("Testes de Exfiltração (Sandbox)", () => {
     const useCase = makeProcessarAtivo(repo);
 
     const assetRef = "opaque-ref-uuid-002";
-    const syntheticAsset: AtivoLogicoProtegido = {
+    const ativo: AtivoLogicoProtegido = {
       id: "sintetico-2",
       chaveReferencia: assetRef,
-      hashPolitica: "valid-policy-sha256",
+      hashPolitica: "hash-sha256-politica-sintetica",
       payloadCifrado: `CIFRADO:${PLAINTEXT_SECRET_FLAG}`,
       createdAt: new Date().toISOString(),
     };
 
-    await repo.salvarSintetico(syntheticAsset);
+    await repo.salvarSintetico(ativo);
 
     // Act: Força uma falha fornecendo uma assinatura corrompida
-    const result = await useCase.executar({
+    const result = await useCase({
       referenciaOpaca: assetRef,
       assinaturaValidacao: "CORRUPTED_SIGNATURE",
     });
@@ -140,7 +140,7 @@ describe("Testes de Exfiltração (Sandbox)", () => {
   });
 
   it("SC-002/SC-003 (Morte Súbita): Garante que testes de exfiltração reprovam o pipeline se houver vazamento deliberado", async () => {
-    // Arrange: Simula um componente defeituoso ou malicioso que tenta ativamente registrar o segredo
+    // Arrange: Simula um componente defeutuoso ou malicioso que tenta ativamente registrar o segredo
     const repo = new FakeAtivoRepository();
     
     // Forçamos o comportamento de log intencional
