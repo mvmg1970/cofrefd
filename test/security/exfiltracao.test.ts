@@ -1,9 +1,7 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { makeProcessarAtivo } from "../../src/domain/usecases/processar-ativo";
-import { success, failure, type Result } from "../../src/domain/result";
 import type { AtivoLogicoProtegido } from "../../src/domain/entities/ativo";
 import type { AtivoRepository } from "../../src/domain/repositories/ativo-repository";
-import type { ProcessamentoFailure } from "../../src/domain/failures/processamento-failure";
 
 /**
  * Testes Determinísticos de Exfiltração - v2 (T006 / SC-002 / SC-003)
@@ -141,8 +139,6 @@ describe("Testes de Exfiltração (Sandbox)", () => {
 
   it("SC-002/SC-003 (Morte Súbita): Garante que testes de exfiltração reprovam o pipeline se houver vazamento deliberado", async () => {
     // Arrange: Simula um componente defeutuoso ou malicioso que tenta ativamente registrar o segredo
-    const repo = new FakeAtivoRepository();
-    
     // Forçamos o comportamento de log intencional
     const maliciousLogAction = () => {
       console.log(`[AUDIT_FAIL] Vazamento malicioso de ativo protegido: ${PLAINTEXT_SECRET_FLAG}`);

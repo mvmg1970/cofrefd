@@ -1,50 +1,60 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Constituição do Cofre Flexdomini
 
-## Core Principles
+**Versão:** 1.0.0
+**Status:** ratificada pelo responsável do projeto
+**Última revisão:** 2026-09-08
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+## Princípios fundamentais
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### I. Fronteiras explícitas
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+O sistema MUST separar custódia, processamento, interfaces externas e governança. Nenhum componente isolado pode reconstruir o conteúdo protegido completo. As dependências entre camadas MUST apontar para contratos estáveis, e a composição SHOULD ocorrer somente na borda do sistema.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Minimização de contexto
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Cada participante MUST receber somente os dados necessários à sua função. Interfaces externas MUST operar com referências opacas, estados e resultados autorizados. Plaintext, chaves e conteúdo classificado MUST permanecer fora das fronteiras que não tenham autorização explícita para custodiá-los.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### III. Segurança demonstrável
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Toda alegação de segurança MUST possuir um controle verificável: teste automatizado, inspeção determinística, evidência de execução ou revisão humana registrada. Declarações absolutas como “inviolável” ou “risco zero” MUST NOT ser usadas como critério de aceite.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### IV. Erro como valor
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Falhas previsíveis MUST ser representadas por resultados explícitos e tipados. Exceções genéricas, stack traces ou detalhes de infraestrutura MUST NOT atravessar fronteiras externas nem compor respostas destinadas a consumidores não autorizados.
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+### V. Desenvolvimento guiado por testes
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Comportamentos novos MUST ter testes escritos antes da implementação correspondente. Cada incremento MUST seguir Red → Green → Refactor, com evidência suficiente para demonstrar que o teste falhava antes da implementação. Requisitos de segurança MUST incluir cenários negativos e testes determinísticos de exfiltração.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### VI. Mudança na origem
+
+Quando a implementação, teste ou análise revelar uma contradição, a correção MUST começar no artefato que define a decisão: requisito na spec, decisão técnica no plan ou ordem de execução nas tasks. Alterar somente o fim da cadeia para mascarar a contradição é proibido.
+
+### VII. Simplicidade e descarte seguro
+
+O trabalho anterior ao fechamento do Gate 0 MUST permanecer experimental, descartável e restrito a dados sintéticos e credenciais descartáveis. Funcionalidades fora do escopo corrente MUST ser adiadas para outra feature. Nenhuma decisão experimental MUST ser tratada como autorização para produção.
+
+### VIII. Responsabilidade humana e segregação
+
+Agentes virtuais podem produzir artefatos e pareceres preliminares, mas não substituem aprovação humana, revisão independente ou responsabilidade decisória. O orquestrador MUST operar somente dentro de tarefas aprovadas, contexto mínimo e limites registrados; MUST NOT alterar requisitos, aprovar o próprio trabalho ou promover código diretamente para produção.
+
+## Padrões de trabalho
+
+Cada feature MUST percorrer a cadeia:
+
+1. Constitution
+2. Specify
+3. Clarify
+4. Plan
+5. Checklist
+6. Tasks
+7. Analyze
+8. Implement
+9. Testes e revisão
+10. Validação manual e integração controlada
+
+Os artefatos da cadeia MUST ser versionados junto com as decisões que justificam o código. Uma feature não pode ser declarada concluída apenas porque os testes automatizados passaram; os critérios de aceite, riscos e evidências também devem estar fechados.
+
+## Governança
+
+Esta constituição governa as features do repositório e prevalece em caso de conflito com decisões locais de implementação. A ratificação e qualquer emenda exigem revisão humana registrada no Git. Até a ratificação, este documento deve ser tratado como proposta e não como autorização para dados reais.

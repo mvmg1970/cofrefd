@@ -1,6 +1,5 @@
 import { createStore } from "zustand/vanilla";
 import type { ProcessarAtivo, ProcessarAtivoOutput } from "../../domain/usecases/processar-ativo";
-import type { AtivoRepository } from "../../domain/repositories/ativo-repository";
 import type { ProcessamentoFailure } from "../../domain/failures/processamento-failure";
 
 export type SandboxStoreState = {
@@ -31,8 +30,7 @@ const messageFor = (failure: ProcessamentoFailure): string => {
  * garantindo o mapeamento de falhas estruturadas para o painel de visualização.
  */
 export const createSandboxStore = (
-  processarAtivo: ProcessarAtivo,
-  repository: AtivoRepository
+  processarAtivo: ProcessarAtivo
 ) => {
   return createStore<SandboxStoreState>((set) => ({
     loading: false,

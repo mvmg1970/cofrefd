@@ -1,4 +1,4 @@
-import type { AtivoLogicoProtegido } from "./ativo";
+import type { AtivoLogicoProtegido } from "../entities/ativo";
 
 export interface AtivoRepository {
   /**

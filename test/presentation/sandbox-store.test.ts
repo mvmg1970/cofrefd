@@ -8,7 +8,7 @@ describe("SandboxStore (Presentation)", () => {
   const seedStore = () => {
     const repository = new InMemoryAtivoRepository();
     const processarAtivo = makeProcessarAtivo(repository);
-    const store = createSandboxStore(processarAtivo, repository);
+    const store = createSandboxStore(processarAtivo);
     return { store, repository };
   };
 

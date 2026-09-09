@@ -1,6 +1,4 @@
 import type { ProcessarAtivo } from "../domain/usecases/processar-ativo";
-import type { Result } from "../domain/result";
-import type { ProcessamentoFailure } from "../domain/failures/processamento-failure";
 
 export type NarrowApiInput = {
   readonly referenciaOpaca: string;

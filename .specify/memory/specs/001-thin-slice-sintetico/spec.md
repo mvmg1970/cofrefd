@@ -1,7 +1,7 @@
 # Feature Specification: Thin Slice Sintético (P1)
 **Feature Branch**: `001-thin-slice-sintetico`
 **Created**: 2026-09-08
-**Status**: Draft
+**Status**: Clarified — aprovada pelo responsável do projeto
 **Priority**: P1 (Essencial para validação de segurança pré-Gate 0)
 
 ## 1. Problema e Intenção (O Porquê)
@@ -58,6 +58,14 @@ Como Auditor de Segurança, eu quero submeter o sistema a tentativas de exfiltra
   * **Then** a resposta de falha retorna exclusivamente o tipo de falha tipado (ex: `invalid-signature`), garantindo que nenhum plaintext ou fragmento do ativo protegido seja exfiltrado na mensagem de erro.
 
 ## 5. Bordas, Premissas e Contratos
+
+### Clarificações resolvidas
+
+1. **O que significa “processamento efêmero” nesta feature?** O thin slice demonstra o contrato de processamento e a não exposição do conteúdo protegido; ele não implementa descriptografia real nem pretende provar limpeza forense de memória. Essas garantias ficam fora desta feature e deverão ser especificadas antes de qualquer uso de dados reais.
+2. **A assinatura válida é um requisito de produto?** Não. O formato concreto da assinatura é uma decisão do plano técnico para fixtures sintéticas. A spec exige apenas que uma solicitação válida seja distinguida de uma solicitação corrompida sem expor conteúdo protegido.
+3. **O que o cenário de exfiltração deve provar?** O comportamento normal e os erros do sistema não podem gravar conteúdo protegido. Uma ação deliberadamente maliciosa que grava o segredo é um controle negativo: o teste deve falhar ao detectar o vazamento, não passar como se a contenção tivesse ocorrido.
+4. **O que o FD-Core pode receber?** Apenas referência opaca, estado permitido e veredito/erro tipado. Payload, plaintext, chaves, stack trace e metadados não autorizados ficam fora da resposta.
+5. **Qual é o status do Gate 0?** Permanece aberto. Esta feature é exclusivamente exploratória, descartável e sintética; não autoriza produção, ingestão real, escolha irreversível de provedor ou uso de segredo real.
 
 ### Pré-Condições (Design by Contract)
 1. O ambiente de execução está restrito ao container de sandbox e isolado de qualquer rede ou infraestrutura de produção.
