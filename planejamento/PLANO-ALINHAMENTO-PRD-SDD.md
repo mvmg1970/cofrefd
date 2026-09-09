@@ -12,6 +12,10 @@ Ainda não existe o Cofre de produção. O trabalho restante precisa ser executa
 
 Nenhuma fase abaixo autoriza dados reais ou promoção a produção antes do fechamento formal do Gate 0.
 
+### Terceira fonte de verdade: parecer do cliente
+
+O parecer técnico de 09/09/2026 complementa o PRD e o livro SDD. Quando detalha o fluxo protegido, ele exige: cliente local confiável, cifragem e assinatura antes da transmissão, impossibilidade técnica de descriptografia administrativa, atestação do executor, formatos declarativos mínimos, scanners dentro da fronteira e descarte/backup comprováveis. Essas exigências devem ser incorporadas à spec antes da implementação.
+
 ## 2. Estado atual e lacunas
 
 ### Concluído como protótipo

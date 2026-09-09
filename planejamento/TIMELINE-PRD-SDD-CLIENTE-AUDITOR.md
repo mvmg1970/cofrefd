@@ -5,6 +5,8 @@
 **Status:** roadmap aprovado; execução futura condicionada aos portões descritos
 **Classificação atual:** protótipo experimental pré-Gate 0
 
+**Atualização:** o parecer do cliente de 09/09/2026 aprovou a direção do fluxo com alterações obrigatórias. Esta timeline foi ajustada para refletir a cifragem e assinatura no ambiente do Curador antes da transmissão.
+
 ## Como ler esta timeline
 
 Cada etapa termina somente quando seu critério de saída e sua evidência forem aprovados. A sequência não representa autorização automática para a etapa seguinte. Dados reais, credenciais reais e promoção a produção permanecem proibidos enquanto o Gate 0 estiver aberto.
@@ -145,3 +147,7 @@ Constitution
 ## Próximo marco
 
 O próximo marco não é implementar código. É fechar as decisões de governança do Gate 0 com owners humanos, critérios de aceite, riscos residuais e autorização explícita para a próxima fase.
+
+## Atualização obrigatória do próximo marco
+
+Antes de qualquer upload, o Curador/cliente deverá aprovar a classificação dos pacotes, o cliente local confiável, o modelo de ameaça, o uso ou não de treinamento, o local de processamento, a política de chaves e as regras de retenção/descarte.
