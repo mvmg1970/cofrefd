@@ -19,7 +19,7 @@ describe("casca visual da sandbox", () => {
   it("deve renderizar controles para uma solicitação opaca", () => {
     const markup = renderToStaticMarkup(<SandboxApp />);
 
-    expect(markup).toContain("Sandbox do Cofre");
+    expect(markup).toContain("Processe um ativo protegido");
     expect(markup).toContain('name="referenciaOpaca"');
     expect(markup).toContain('name="assinaturaValidacao"');
     expect(markup).toContain("Processar ativo");
