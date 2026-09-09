@@ -4,6 +4,8 @@
 **Status:** manual do protótipo de sandbox
 **Público:** cliente, responsável pelo produto e auditoria técnica
 
+**Atualização de segurança:** esta tela continua sendo apenas uma sandbox local. Ela não é o cliente confiável de envio do Curador e não deve receber arquivos reais ou pacotes confidenciais.
+
 ## 1. Para que serve esta tela?
 
 Esta tela é um painel demonstrativo do Cofre Flexdomini. Ela permite executar, em ambiente local e com dados sintéticos, o fluxo mínimo de solicitação e validação de um ativo protegido.
@@ -150,6 +152,8 @@ Esta tela não:
 - prova isolamento físico de processo/container;
 - prova limpeza forense de memória;
 - representa autorização para produção.
+
+O fluxo futuro de envio deverá cifrar e assinar o pacote no ambiente do Curador antes da transmissão; essa capacidade ainda não existe nesta tela.
 
 ## 9. Checklist de demonstração
 
