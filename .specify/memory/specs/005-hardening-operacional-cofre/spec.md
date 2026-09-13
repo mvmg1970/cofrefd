@@ -115,6 +115,108 @@ Falhas de attestation, custódia, rede, persistência, concorrência, integridad
 
 Antes do planejamento, o Curador deverá aprovar ou registrar como pendentes: tecnologia de isolamento, mecanismo de attestation, classe de KMS/HSM para ambiente sintético, persistência, modelo de IAM, política de rede, estratégia de backups/snapshots, ambiente de execução e critérios de equivalência produtiva.
 
+## 8.1 Decisões de clarificação
+
+### CLARIFY-001 — Tecnologia da fronteira de execução
+
+**Decisão aprovada:** o primeiro protótipo operacional sintético utilizará microVMs como fronteira do executor.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** priorizar isolamento mais forte e maior aderência ao requisito C-002 do parecer independente.
+
+**Limite:** esta decisão não autoriza produção, dados reais ou fechamento do Gate 0. A microVM escolhida, seu runtime, configuração, attestation e evidências ainda deverão ser definidos no Plan Gate.
+
+### CLARIFY-002 — Evidência de attestation
+
+**Decisão aprovada:** a identidade e a integridade da microVM serão comprovadas por TPM/measured boot.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** manter a cadeia de confiança vinculada ao ambiente de execução e permitir detectar alterações no boot, na imagem e no código autorizado.
+
+**Limite:** a decisão não comprova que o mecanismo já existe e não autoriza produção. O plano deverá definir provisionamento, política de medição, verificador, tratamento de falha e evidência reproduzível.
+
+### CLARIFY-003 — Custódia de chaves no protótipo
+
+**Decisão aprovada:** o protótipo operacional sintético utilizará um emulador local de KMS/HSM com interface compatível e sem exportação de chaves.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** permitir testes de integração com uma fronteira de custódia provider-neutral, sem promover o emulador a equivalente de hardware ou serviço produtivo.
+
+**Limite:** a decisão não comprova proteção física, KMS/HSM produtivo ou segurança de hardware. A implementação deverá manter explícita a diferença entre emulação e controle produtivo.
+
+### CLARIFY-004 — Persistência do protótipo
+
+**Decisão aprovada:** o protótipo operacional sintético utilizará SQLite com WAL e arquivo protegido para quarentena, anti-replay, estados e auditoria.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** fornecer durabilidade local, atomicidade e recuperação após reinício sem introduzir dependência de provedor externo nesta fase.
+
+**Limite:** SQLite local não equivale a storage produtivo distribuído. O plano deverá definir controle de acesso ao arquivo, backup, corrupção, concorrência, recuperação e descarte verificável.
+
+### CLARIFY-005 — Bloqueio de egress
+
+**Decisão aprovada:** a microVM terá interface de rede, protegida por firewall deny-by-default e allowlist explícita.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** permitir testes operacionais de bloqueio, observabilidade e tentativas de exfiltração sem substituir a fronteira de rede por uma regra de aplicação.
+
+**Limite:** a decisão não autoriza comunicação com serviços externos. O plano deverá definir regras mínimas, DNS, IPv4/IPv6, proxy, endpoints de metadados e evidências de negação.
+
+### CLARIFY-006 — Backups, réplicas e snapshots
+
+**Decisão aprovada:** o protótipo criará cópias sintéticas controladas, cifradas e com lifecycle testável para validar retenção e descarte.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** exercitar a política aprovada para cópias e resíduos sem usar dados reais ou depender de um provedor externo.
+
+**Limite:** cópias sintéticas locais não comprovam a operação produtiva. O plano deverá definir cobertura, cifragem, acesso, retenção, falhas, evidência de descarte e exceções legais/investigativas.
+
+### CLARIFY-007 — Separação de identidades
+
+**Decisão aprovada:** o protótipo utilizará identidades separadas por serviço, credenciais distintas e mTLS interno para separar Curador, Operador, Administrador, gateway, custódia e executor.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** aumentar a separação de privilégios e a auditabilidade sem introduzir provedor externo de identidade antes do fechamento do Gate 0.
+
+**Limite:** identidades locais de protótipo não equivalem a IAM produtivo. O plano deverá definir emissão, rotação, revogação, armazenamento, escopo e testes de abuso entre papéis.
+
+### CLARIFY-008 — Ambiente de execução
+
+**Decisão aprovada:** o protótipo operacional será executado em Linux nativo dedicado.
+
+**Responsável:** Curador/responsável pelo produto.
+
+**Data:** 13/09/2026.
+
+**Justificativa:** priorizar suporte adequado a microVM, TPM/measured boot, firewall e observabilidade operacional.
+
+**Limite:** o ambiente dedicado de protótipo não é produção. O plano deverá definir baseline, hardening do host, acesso administrativo, atualização, isolamento, coleta de evidências e descarte.
+
+## 8.2 Resultado do Clarify Gate
+
+As decisões CLARIFY-001 a CLARIFY-008 foram aprovadas pelo Curador. O próximo artefato obrigatório é o `plan.md`, que deverá transformar essas decisões em arquitetura, tarefas, evidências e critérios de validação, sem iniciar implementação.
+
 ## 9. Rastreabilidade
 
 - **PRD:** fronteira do Cofre, FD-Core, executor, KMS/HSM, API estreita e Gate 0.
