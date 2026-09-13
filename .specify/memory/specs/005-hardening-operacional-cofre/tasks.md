@@ -22,7 +22,7 @@
   **Depende de:** Checklist 005 aprovado.
   **Evidência:** matriz versionada e revisada.
 
-- [ ] **T002** Definir contratos tipados para attestation, autorização de chave, identidade de serviço, ingestão persistente, egress, lifecycle e evidência.
+- [x] **T002** Definir contratos tipados para attestation, autorização de chave, identidade de serviço, ingestão persistente, egress, lifecycle e evidência.
   **Rastreia:** FR-001, FR-003, FR-004, FR-006, FR-008, FR-009, FR-010.
   **Depende de:** T001.
   **Evidência:** tipos, invariantes e testes de contrato.
@@ -150,6 +150,17 @@
 ## Critério de conclusão
 
 Uma tarefa somente poderá ser marcada como concluída quando possuir implementação correspondente, testes aprovados, inspeção manual, evidência versionada e classificação explícita do ambiente. A existência desta lista não comprova qualquer controle.
+
+## Evidência de execução
+
+### T002
+
+- Contratos implementados em `src/domain/contracts/hardening-operational.ts`.
+- Teste Red executado antes da implementação e falhou por módulo ausente.
+- Teste Green: 4 testes aprovados.
+- TypeScript: `npx tsc --noEmit` aprovado.
+- `git diff --check` aprovado nos arquivos da tarefa.
+- Classificação: contrato implementado no código; não comprova controle operacional produtivo.
 
 ## Registro do Tasks Gate
 
