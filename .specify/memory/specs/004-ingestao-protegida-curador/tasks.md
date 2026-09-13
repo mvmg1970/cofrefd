@@ -160,7 +160,7 @@
   **Depende de:** T025.
   **Evidência:** documentação revisada e vinculada aos testes.
 
-- [ ] **T027** Submeter decisão formal de fechamento do Gate 0 e autorização ou rejeição de piloto controlado.
+- [x] **T027** Submeter decisão formal de fechamento do Gate 0 e autorização ou rejeição de piloto controlado.
   **Rastreia:** limites da SPEC 004 e PRD.
   **Depende de:** T025, T026 e decisões operacionais pendentes.
   **Evidência:** decisão assinada, com escopo, riscos, responsáveis e condições.
@@ -382,4 +382,12 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Manual da sandbox atualizado para manter explícitos seus limites sintéticos.
 - `git diff --check` aprovado nos documentos alterados.
 - Status: T026 concluída; a documentação não autoriza produção nem uso de dados reais.
+
+### T027 — evidência final
+
+- Decisão formal registrada em `gate-0-decision.md`.
+- Decisão aprovada pelo Curador em 13/09/2026.
+- Gate 0 mantido aberto.
+- Uso de dados reais, produção e piloto real rejeitados até nova decisão baseada em evidências operacionais.
+- Status: T027 concluída; a SPEC 004 permanece sem autorização produtiva.
 - Relatório: `security-review.md`.
