@@ -17,7 +17,7 @@
 
 ## Fase 0 — contratos e laboratório
 
-- [ ] **T001** Registrar matriz PRD ↔ parecer do cliente ↔ parecer independente ↔ SPEC 005 ↔ checklist ↔ tarefas.
+- [x] **T001** Registrar matriz PRD ↔ parecer do cliente ↔ parecer independente ↔ SPEC 005 ↔ checklist ↔ tarefas.
   **Rastreia:** rastreabilidade SDD.
   **Depende de:** Checklist 005 aprovado.
   **Evidência:** matriz versionada e revisada.
@@ -160,3 +160,12 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 **Próximo passo autorizado:** executar a análise SDD da SPEC 005.
 
 **Limite da decisão:** a aprovação não autoriza implementação, produção, uso de dados reais ou fechamento do Gate 0.
+
+## Evidência de execução
+
+### T001
+
+- Matriz criada em `traceability-matrix.md`.
+- Cobertura registrada: 10 requisitos, 6 cenários, 8 clarificações e 24 tarefas.
+- `git diff --check` aprovado.
+- Matriz revisada e aprovada pelo Curador em 13/09/2026.
