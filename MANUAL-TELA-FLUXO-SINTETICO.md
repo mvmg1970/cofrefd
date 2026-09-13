@@ -171,3 +171,5 @@ O fluxo futuro de envio deverá cifrar e assinar o pacote no ambiente do Curador
 ## 10. Classificação e limites
 
 Este manual descreve o thin slice visual e sintético aprovado para demonstração. As garantias de produção ainda dependem do fechamento do Gate 0, da implementação de fronteiras reais entre custódia e executor, de autenticação, criptografia, auditoria, operação e revisão independente.
+
+Em 13/09/2026, a revisão independente foi concluída e rejeitou o fechamento do Gate 0. O parecer confirmou que esta tela continua sendo apenas uma demonstração sintética e não comprova KMS/HSM, IAM, isolamento operacional, bloqueio de egress, descarte verificável ou autorização para dados reais.

@@ -155,7 +155,7 @@
   **Depende de:** T024 e todas as tarefas anteriores aplicáveis.
   **Evidência:** relatório independente com achados e correções.
 
-- [ ] **T026** Atualizar documentação operacional, manual, timeline e diário de bordo com evidências reais do ciclo.
+- [x] **T026** Atualizar documentação operacional, manual, timeline e diário de bordo com evidências reais do ciclo.
   **Rastreia:** rastreabilidade SDD.
   **Depende de:** T025.
   **Evidência:** documentação revisada e vinculada aos testes.
@@ -373,4 +373,13 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Decisão do revisor: rejeitado para fechamento do Gate 0, produção, piloto com dados reais ou declaração de segurança operacional.
 - Hash do pacote revisado: `52775cee6a0143bcc18b5a0192083de29ec3c3b195c1813285f9aae68021480a`.
 - Status: T025 concluída como execução da revisão, com bloqueadores documentados; Gate 0 permanece aberto.
+
+### T026 — evidência final
+
+- Diário de bordo de 10/09 atualizado com o resultado da revisão independente de 13/09.
+- Resumo executivo de 10/09 atualizado para registrar a rejeição do fechamento do Gate 0.
+- Timeline atualizada com a revisão independente concluída e os bloqueadores produtivos.
+- Manual da sandbox atualizado para manter explícitos seus limites sintéticos.
+- `git diff --check` aprovado nos documentos alterados.
+- Status: T026 concluída; a documentação não autoriza produção nem uso de dados reais.
 - Relatório: `security-review.md`.

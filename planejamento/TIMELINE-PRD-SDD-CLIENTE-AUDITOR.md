@@ -3,9 +3,11 @@
 **Data de referência:** 2026-09-09
 **Público:** cliente, auditor e responsável pelo projeto
 **Status:** roadmap aprovado; execução futura condicionada aos portões descritos
-**Classificação atual:** protótipo experimental pré-Gate 0
+**Classificação atual:** protótipo experimental pré-Gate 0, com revisão independente concluída e bloqueadores produtivos abertos
 
 **Atualização:** o parecer do cliente de 09/09/2026 aprovou a direção do fluxo com alterações obrigatórias. Esta timeline foi ajustada para refletir a cifragem e assinatura no ambiente do Curador antes da transmissão.
+
+**Atualização de 13/09/2026:** a revisão independente foi concluída. O parecer rejeitou o fechamento do Gate 0 e identificou bloqueadores relacionados a custódia de chaves, isolamento do executor e pipeline operacional de ingestão. Nenhuma etapa de produção ou uso de dados reais foi autorizada.
 
 ## Como ler esta timeline
 
@@ -21,6 +23,7 @@ Cada etapa termina somente quando seu critério de saída e sua evidência forem
 | 4 | Refinamento visual para demonstração | Concluída | UI aprovada pelo cliente, 21 testes, build e revisão visual |
 | 5 | Correção de dependências | Concluída | Vite/Vitest atualizados e `npm audit`: 0 vulnerabilidades |
 | 6 | Organização documental | Em consolidação | Plano de alinhamento, timeline e manual disponíveis para revisão |
+| 6.1 | Implementação sintética da SPEC 004 e revisão independente | Concluída com ressalvas | 31 arquivos de teste, 75 testes, type-check, build e parecer independente; bloqueadores produtivos registrados |
 | 7 | Fechamento das decisões do Gate 0 | Pendente | Ata com decisões, owners, riscos aceitos e itens adiados |
 | 8 | API estreita real | Pendente | Contrato externo, autenticação, limites, erros e testes de exfiltração |
 | 9 | Custódia, executor e criptografia | Pendente | Fronteiras reais, isolamento, KMS/HSM e descarte demonstrados |
@@ -146,7 +149,7 @@ Constitution
 
 ## Próximo marco
 
-O próximo marco não é implementar código. É fechar as decisões de governança do Gate 0 com owners humanos, critérios de aceite, riscos residuais e autorização explícita para a próxima fase.
+O próximo marco é corrigir os bloqueadores do parecer independente, atualizar as evidências operacionais e só então fechar as decisões de governança do Gate 0 com owners humanos, critérios de aceite, riscos residuais e autorização explícita para a próxima fase.
 
 ## Atualização obrigatória do próximo marco
 
