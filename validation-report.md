@@ -45,3 +45,6 @@ O comando `npm run build` permanece bloqueado pela ausência de `index.html`. A 
 ## Status
 
 O protótipo continua restrito a sandbox e dados sintéticos. A validação automatizada passou e as vulnerabilidades conhecidas foram corrigidas, mas a feature não está pronta para produção.
+# Nota de rastreabilidade
+
+Este relatório contém evidências históricas de validações anteriores. Resultados posteriores podem substituir ou complementar seus números, mas o arquivo é preservado para auditoria. Para a revisão independente de 13/09/2026, consultar também `security-review-independent-2026-09-13.md`.
