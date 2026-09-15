@@ -27,7 +27,7 @@
   **Depende de:** T001.
   **Evidência:** tipos, invariantes e testes de contrato.
 
-- [ ] **T003** Preparar baseline do Linux nativo dedicado e documentar runtime de microVM, TPM, firewall e ferramentas de laboratório.
+- [ ] **T003** Preparar baseline do laboratório AWS e documentar EC2/Nitro Enclaves, atestação, KMS, firewall e ferramentas de validação.
   **Rastreia:** DT-001, DT-002, DT-005, DT-008.
   **Depende de:** T001.
   **Evidência:** inventário, versões, configuração e checklist de hardening.

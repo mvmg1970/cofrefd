@@ -113,15 +113,23 @@ Nenhum resultado da categoria 1 ou 2 poderá ser registrado como categoria 3.
 | administrador obter chaves | separação de identidades, ausência de exportação e testes negativos |
 | falha parcial publicar pacote | transações, estados monotônicos e recuperação após reinício |
 
-## 9. Dependências e decisões ainda abertas
+## 9. Plataforma aprovada para o laboratório
+
+Conforme decisão técnica registrada em `decision-aws-nitro-enclaves.md`, o laboratório utilizará AWS EC2 com Nitro Enclaves e AWS KMS. A decisão é válida para planejamento e testes sintéticos; não autoriza produção nem dados reais.
+
+A primeira instância de laboratório será `m5.xlarge`, com Amazon Linux 2023 e Nitro Enclaves habilitado. A instância será temporária e deverá ser encerrada ao final de cada ciclo de testes.
+
+O desenho deverá comprovar o enclave sem rede externa, a atestação criptográfica, a liberação de operações no KMS condicionada às medições aprovadas e a impossibilidade de acesso autônomo do operador ou administrador ao conteúdo processado.
+
+## 10. Dependências e decisões ainda abertas
 
 O plano depende da aprovação do Checklist Gate e do Tasks Gate. Ainda deverão ser detalhados antes do código: runtime de microVM, formato do relatório TPM, biblioteca de mTLS, esquema SQLite, ferramenta de firewall, formato das cópias sintéticas, política de backup do laboratório, observabilidade e critérios de equivalência produtiva.
 
-## 10. Critério de saída do Plan Gate
+## 11. Critério de saída do Plan Gate
 
 O Plan Gate será concluído quando este plano for aprovado pelo Curador e todas as decisões técnicas necessárias à primeira tarefa forem classificadas como aprovadas, pendentes ou bloqueadas, com componente, dependência, teste e evidência esperada. Nenhum código deverá ser implementado antes do Checklist, Tasks e Analyze Gates.
 
-## 11. Registro do Plan Gate
+## 12. Registro do Plan Gate
 
 **Decisão:** plano aprovado pelo Curador/responsável pelo produto.
 
