@@ -154,3 +154,11 @@ O próximo marco é corrigir os bloqueadores do parecer independente, atualizar 
 ## Atualização obrigatória do próximo marco
 
 Antes de qualquer upload, o Curador/cliente deverá aprovar a classificação dos pacotes, o cliente local confiável, o modelo de ameaça, o uso ou não de treinamento, o local de processamento, a política de chaves e as regras de retenção/descarte.
+
+## Atualização de 18/09/2026 — baseline AWS parcial
+
+Foi executado um ciclo controlado de evidências na instância AWS `cofre-lab-parent-001`. Foram validados o host Amazon Linux 2023, Nitro CLI 1.5.0, allocator, EBS criptografado, `nftables` com entrada deny-by-default, SSH restrito por `/32`, IMDSv2 obrigatório, egress do host, sincronização de horário, SSH e Session Manager.
+
+Os artefatos foram preservados localmente e a integridade dos relatórios e capturas foi verificada por hashes. A instância foi interrompida ao final do ciclo.
+
+Este ciclo não comprovou TPM/measured boot, egress direto do enclave, atestação sem `DEBUG_MODE`, integração KMS, mTLS ou descarte operacional. A T003 permanece pendente, o laboratório continua sintético e o Gate 0 permanece aberto.

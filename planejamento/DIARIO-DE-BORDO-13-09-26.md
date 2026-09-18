@@ -58,6 +58,6 @@ o trabalho ainda está em fase inicial. Permanecem pendentes a instalação e co
 
 ## Situação atual
 
-O laboratório AWS foi criado com controles iniciais de custo, identidade, rede, armazenamento e suporte a Nitro Enclaves. A instância deverá permanecer interrompida durante a pausa para evitar cobrança de computação; o estado final interrompido ainda deverá ser confirmado na retomada.
+O laboratório AWS foi criado com controles iniciais de custo, identidade, rede, armazenamento e suporte a Nitro Enclaves. O enclave sintético foi encerrado e a instância EC2 foi confirmada como interrompida, evitando novas cobranças de computação.
 
-O projeto continua restrito a dados sintéticos. Não há autorização para dados reais, produção ou fechamento do Gate 0. O próximo passo obrigatório é confirmar o estado da instância e conectar-se com segurança para coletar o baseline do Amazon Linux 2023 e instalar as ferramentas de laboratório da T003.
+O projeto continua restrito a dados sintéticos. Não há autorização para dados reais, produção ou fechamento do Gate 0. O próximo passo obrigatório é retomar a instância, validar firewall e política de egress e então avançar para a atestação e integração controlada com KMS.

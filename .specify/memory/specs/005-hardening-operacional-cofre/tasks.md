@@ -180,3 +180,13 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Cobertura registrada: 10 requisitos, 6 cenários, 8 clarificações e 24 tarefas.
 - `git diff --check` aprovado.
 - Matriz revisada e aprovada pelo Curador em 13/09/2026.
+
+### T003 — ciclo de evidências de 18/09/2026
+
+- Baseline AWS coletado na instância `cofre-lab-parent-001`, sem dados reais.
+- Amazon Linux 2023, kernel, Nitro CLI `1.5.0`, allocator, armazenamento, firewall, egress do host, IMDSv2 e sincronização de horário registrados.
+- SSH e Session Manager validados; a regra interna de SSH foi corrigida para o IP administrativo vigente e sua persistência foi confirmada.
+- Capturas do Console AWS e relatórios operacionais preservados em `evidencias/T003/`.
+- Integridade dos relatórios e capturas validada em `SHA256SUMS-ALL.txt`.
+- Instância interrompida ao final da coleta para evitar custos de computação.
+- **Status:** permanece pendente; ainda faltam TPM/measured boot, teste direto de egress do enclave, atestação sem `DEBUG_MODE`, integração KMS e revisão manual final.
