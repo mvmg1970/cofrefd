@@ -200,3 +200,12 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Evidências `09-enclave-vsock-output.txt` a `12-enclave-after.txt` e hashes validados localmente.
 - **Limite:** EIF não assinado (`IsSigned: false`); KMS, PCR8, atestação externa e produção continuam fora do escopo.
 - Nota SDD do desvio metodológico e ações corretivas registrada em `planejamento/NOTA-SDD-PROBE-VSOCK-19-09-26.md`.
+
+### T003 — ciclo assinado de 19/09/2026
+
+- EIF assinado com certificado ECDSA temporário de laboratório e executado sem `--debug-mode`.
+- `describe-eif` confirmou `IsSigned: true`, `SignatureCheck: true`, `CheckCRC: true` e PCR8 não zerado.
+- Saída recebida via vsock; DNS, HTTP, HTTPS e IMDS foram bloqueados dentro do enclave.
+- Enclave encerrado com `nitro-cli describe-enclaves: []`.
+- Evidências `13-enclave-signed-vsock-output.txt` a `16-enclave-signed-after.txt` e hashes validados localmente.
+- **Limite:** a assinatura é apenas de laboratório; KMS, atestação externa, mTLS, descarte e produção continuam fora do escopo.

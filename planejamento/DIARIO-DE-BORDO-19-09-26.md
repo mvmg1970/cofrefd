@@ -19,14 +19,17 @@ Executar o primeiro ciclo do artefato sintético do enclave sem `DEBUG_MODE`, co
 - DNS, HTTP, HTTPS e endpoint IMDS testados dentro do enclave e bloqueados.
 - Enclave encerrado; `describe-enclaves` retornou `[]`.
 - Evidências copiadas para o ambiente local e hashes validados como íntegros.
+- EIF assinado com certificado ECDSA de laboratório e executado sem `DEBUG_MODE`.
+- `describe-eif` confirmou `IsSigned: true`, `SignatureCheck: true`, `CheckCRC: true` e PCR8 não zerado.
+- O ciclo assinado repetiu os bloqueios de DNS, HTTP, HTTPS e IMDS; `describe-enclaves` retornou `[]`.
+- Evidências `13` a `16` foram copiadas para o ambiente local e tiveram integridade validada.
 
 ## Resultado
 
-O ciclo comprovou o funcionamento sintético do EIF sem modo debug, a comunicação host-enclave por vsock e o bloqueio de rede externa observado pelo probe. A evidência não comprova assinatura do EIF, atestação aceita por KMS, integração de chaves ou equivalência produtiva.
+O ciclo comprovou o funcionamento sintético do EIF sem modo debug, a comunicação host-enclave por vsock, a assinatura de laboratório e o bloqueio de rede externa observado pelo probe. A evidência não comprova atestação aceita por KMS, integração de chaves ou equivalência produtiva.
 
 ## Pendências
 
-- assinar o EIF e validar PCR8;
 - implementar/verificar atestação externa;
 - integrar KMS de laboratório sem exportação;
 - validar mTLS, persistência, descarte e auditoria;

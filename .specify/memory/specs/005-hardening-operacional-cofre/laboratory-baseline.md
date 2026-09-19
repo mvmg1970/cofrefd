@@ -106,3 +106,15 @@ Foi construído e executado um probe sintético dentro de um EIF sem `DEBUG_MODE
 - Evidências `09` a `12` e seus hashes foram preservadas em `evidencias/T003/`.
 
 Essa execução comprova um teste sintético de isolamento de rede e ciclo de vida. Não comprova assinatura do EIF, atestação aceita por KMS, custódia de chaves, mTLS ou equivalência produtiva.
+
+## 9. Atualização de evidências — ciclo assinado de 19/09/2026
+
+- EIF assinado com certificado ECDSA temporário de laboratório, sem dados reais.
+- `describe-eif` confirmou `IsSigned: true`, `SignatureCheck: true` e `CheckCRC: true`.
+- PCR0, PCR1, PCR2 e PCR8 foram registrados e não estão zerados.
+- O EIF assinado foi executado sem `--debug-mode` via vsock.
+- DNS, HTTP, HTTPS e endpoint IMDS permaneceram bloqueados dentro do enclave.
+- O enclave terminou corretamente; `nitro-cli describe-enclaves` retornou `[]`.
+- Evidências `13` a `16` e `SHA256SUMS.txt` foram preservadas e validadas localmente.
+
+O certificado é exclusivamente de laboratório, com validade curta, e não comprova atestação aceita por KMS, custódia produtiva, mTLS, descarte ou equivalência produtiva.
