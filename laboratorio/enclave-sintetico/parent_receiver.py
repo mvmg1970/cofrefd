@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import socket
+import base64
+import secrets
 
 
 PORT = 5000
+DOCUMENT_PATH = "/tmp/attestation-document.cbor.b64"
 
 
 def main() -> None:
@@ -16,11 +19,29 @@ def main() -> None:
         connection, address = server.accept()
         with connection:
             print(f"VSOCK_RECEIVER_CONNECTED cid={address[0]}", flush=True)
+            nonce = secrets.token_bytes(32)
+            with open("/tmp/attestation-nonce.hex", "w", encoding="ascii") as nonce_file:
+                nonce_file.write(nonce.hex())
+            connection.sendall(f"NONCE {nonce.hex()}\n".encode("ascii"))
+            pending = ""
             while True:
                 data = connection.recv(4096)
                 if not data:
                     break
-                print(data.decode("utf-8", errors="replace"), end="", flush=True)
+                pending += data.decode("utf-8", errors="replace")
+                lines = pending.split("\n")
+                pending = lines.pop()
+                for line in lines:
+                    if line.startswith("ATTESTATION_DOCUMENT_B64 "):
+                        encoded = line.split(" ", 1)[1].strip()
+                        base64.b64decode(encoded, validate=True)
+                        with open(DOCUMENT_PATH, "w", encoding="ascii") as document:
+                            document.write(encoded)
+                        print("ATTESTATION_DOCUMENT_RECEIVED file=/tmp/attestation-document.cbor.b64", flush=True)
+                    else:
+                        print(line, flush=True)
+            if pending:
+                print(pending, flush=True)
         print("VSOCK_RECEIVER_DONE", flush=True)
 
 

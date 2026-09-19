@@ -5,7 +5,7 @@ RUN dnf install -y python3 python3-pip && dnf clean all
 RUN python3 -m pip install --no-cache-dir --disable-pip-version-check cbor2==5.6.5
 
 WORKDIR /app
-COPY app.py nsm_client.py /app/
+COPY app.py nsm_client.py attestation_verifier.py /app/
 
 USER 1000:1000
 ENTRYPOINT ["python3", "/app/app.py"]

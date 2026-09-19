@@ -6,6 +6,7 @@ Não processa dados reais, não usa credenciais e não envia conteúdo protegido
 from __future__ import annotations
 
 import socket
+import base64
 from typing import Iterable, Optional
 
 from nsm_client import NSMUnavailable, attestation_summary, get_attestation_document
@@ -31,8 +32,13 @@ class VsockReporter:
             self._socket = socket.socket(vsock_family, socket.SOCK_STREAM)
             self._socket.settimeout(3)
             self._socket.connect((PARENT_CID, PARENT_PORT))
+            challenge = self._socket.recv(128).decode("ascii").strip()
+            if not challenge.startswith("NONCE "):
+                raise OSError("invalid parent challenge")
+            self.nonce = bytes.fromhex(challenge.split(" ", 1)[1])
         except OSError:
             self._socket = None
+            self.nonce = None
 
     def send(self, message: str) -> None:
         line = f"{message}\n".encode("utf-8", errors="replace")
@@ -47,6 +53,12 @@ class VsockReporter:
     def close(self) -> None:
         if self._socket is not None:
             self._socket.close()
+
+    def send_document(self, document: bytes) -> None:
+        if self._socket is None:
+            return
+        encoded = base64.b64encode(document).decode("ascii")
+        self._socket.sendall(f"ATTESTATION_DOCUMENT_B64 {encoded}\n".encode("ascii"))
 
 
 def probe_dns(report: VsockReporter) -> None:
@@ -69,8 +81,9 @@ def probe_tcp(report: VsockReporter, targets: Iterable[tuple[str, int]]) -> None
 
 def probe_attestation(report: VsockReporter) -> None:
     try:
-        document = get_attestation_document()
+        document = get_attestation_document(nonce=report.nonce)
         report.send(attestation_summary(document))
+        report.send_document(document)
     except (NSMUnavailable, OSError, RuntimeError) as error:
         report.send(f"ATTESTATION_DOCUMENT indisponivel; error={type(error).__name__}")
 

@@ -20,6 +20,9 @@ class FakeVsock:
     def connect(self, address):
         self.connected_to = address
 
+    def recv(self, _size):
+        return b"NONCE " + (b"ab" * 32) + b"\n"
+
     def sendall(self, payload):
         self.sent.append(payload)
 
