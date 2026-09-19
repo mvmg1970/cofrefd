@@ -224,3 +224,10 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Saída externa permaneceu sanitizada; o conteúdo assinado não foi enviado ao host.
 - Evidências `18-enclave-attestation-output.txt` a `21-enclave-attestation-after.txt` foram validadas localmente.
 - **Limite:** geração comprovada; validação externa da cadeia Nitro, integração KMS e autorização criptográfica continuam pendentes.
+
+### T003 — validação externa de atestação de 19/09/2026
+
+- Parent gerou nonce de 32 bytes; o enclave o incluiu no attestation document.
+- Verificador confirmou assinatura COSE, cadeia Nitro, raiz AWS, nonce e PCR0–PCR2.
+- Resultado salvo em `22-attestation-verification.json`; evidências `23` a `26` e hashes foram validados localmente.
+- **Resultado:** atestação criptográfica de laboratório comprovada; KMS, mTLS, descarte e produção permanecem fora do escopo.

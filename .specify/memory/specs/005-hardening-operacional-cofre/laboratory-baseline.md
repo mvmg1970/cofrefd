@@ -138,3 +138,14 @@ Conclusão: a presença e a medição por TPM não foram comprovadas neste host 
 - Evidências `18` a `21` foram preservadas e validadas localmente.
 
 Limite: a geração foi comprovada, mas a cadeia de confiança do documento não foi validada por um verificador externo e nenhuma decisão KMS foi executada.
+
+## 12. Validação externa de atestação — 19/09/2026
+
+- Parent gerou nonce aleatório de 32 bytes e o enclave o incluiu no documento.
+- Verificador offline confirmou a assinatura COSE do documento.
+- Cadeia de certificados Nitro validada até a raiz AWS com SHA-256 `641a0321a3e244efe456463195d606317ed7cdcc3c1756e09893f3c68f79bb5b`.
+- Nonce, PCR0, PCR1 e PCR2 coincidiram com os valores esperados do EIF.
+- Documento bruto foi mantido em arquivo controlado; logs exibiram apenas resultados sanitizados.
+- Evidência de verificação: `22-attestation-verification.json`; pacote `T003-evidence-2026-09-19-attestation-verified.tar.gz`.
+
+Conclusão: a geração e a validação criptográfica de laboratório foram comprovadas. KMS, mTLS, descarte e equivalência produtiva continuam pendentes.

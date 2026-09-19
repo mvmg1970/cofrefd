@@ -26,6 +26,8 @@ Executar o primeiro ciclo do artefato sintético do enclave sem `DEBUG_MODE`, co
 - Verificação do host não encontrou dispositivo TPM, serviço TPM ou event log de measured boot; a evidência `17` foi preservada e validada por hash.
 - Probe atualizado solicitou attestation document ao NSM dentro do enclave e reportou somente tamanho e SHA-256 sanitizados.
 - Documento de atestação gerado com 4460 bytes; evidências `18` a `21` foram preservadas e validadas.
+- Fluxo completo executado com nonce do parent; verificador confirmou assinatura COSE, cadeia Nitro, raiz AWS, nonce de 32 bytes e PCR0–PCR2.
+- Evidências `22` a `26` foram preservadas e todos os hashes do pacote foram validados localmente.
 
 ## Resultado
 
@@ -39,6 +41,7 @@ O ciclo comprovou o funcionamento sintético do EIF sem modo debug, a comunicaç
 - revisão independente final.
 - TPM/measured boot não disponíveis neste host de laboratório.
 - Validação externa da assinatura do documento e autorização por KMS ainda não foram executadas.
+- A validação externa foi executada localmente; autorização por KMS permanece fora do escopo.
 
 A T003 permanece pendente. Não foram usados dados reais e o Gate 0 continua aberto.
 
