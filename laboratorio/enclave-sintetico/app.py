@@ -8,6 +8,8 @@ from __future__ import annotations
 import socket
 from typing import Iterable, Optional
 
+from nsm_client import NSMUnavailable, attestation_summary, get_attestation_document
+
 
 TARGETS: tuple[tuple[str, int], ...] = (
     ("example.com", 80),
@@ -65,12 +67,21 @@ def probe_tcp(report: VsockReporter, targets: Iterable[tuple[str, int]]) -> None
             report.send(f"TCP {host}:{port}: bloqueado/indisponivel; error={type(error).__name__}")
 
 
+def probe_attestation(report: VsockReporter) -> None:
+    try:
+        document = get_attestation_document()
+        report.send(attestation_summary(document))
+    except (NSMUnavailable, OSError, RuntimeError) as error:
+        report.send(f"ATTESTATION_DOCUMENT indisponivel; error={type(error).__name__}")
+
+
 def main() -> None:
     report = VsockReporter()
     try:
         report.send("ENCLAVE_PROBE classification=laboratorio-sintetico debug=false")
         probe_dns(report)
         probe_tcp(report, TARGETS)
+        probe_attestation(report)
         report.send("ENCLAVE_PROBE_DONE")
     finally:
         report.close()

@@ -4,6 +4,7 @@ from contextlib import redirect_stdout
 from unittest.mock import patch
 
 import app
+import nsm_client
 
 
 class FakeVsock:
@@ -47,6 +48,13 @@ class VsockReporterTests(unittest.TestCase):
                 reporter.send("fallback")
 
         self.assertIn("fallback", output.getvalue())
+
+
+class AttestationSummaryTests(unittest.TestCase):
+    def test_summary_does_not_include_document_contents(self):
+        summary = nsm_client.attestation_summary(b"synthetic-attestation")
+        self.assertTrue(summary.startswith("ATTESTATION_DOCUMENT length="))
+        self.assertNotIn("synthetic-attestation", summary)
 
 
 if __name__ == "__main__":

@@ -15,4 +15,11 @@ Este artefato é somente de laboratório. Ele tenta resolver `example.com` e abr
 9. copiar o `.eif`, hashes e logs para `evidencias/T003/`;
 10. interromper a instância ao final.
 
+## Atestação sintética
+
+O probe solicita o attestation document ao NSM somente de dentro do enclave.
+Para manter a saída sanitizada, o parent recebe apenas o tamanho e o SHA-256
+local do documento; o conteúdo assinado não é enviado nem persistido pelo
+probe. A ausência de `/dev/nsm` fora de um enclave é esperada.
+
 O build local não comprova o funcionamento do Nitro Enclave. A validação somente ocorre na EC2 aprovada.
