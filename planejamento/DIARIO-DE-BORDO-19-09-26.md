@@ -50,3 +50,15 @@ A T003 permanece pendente. Não foram usados dados reais e o Gate 0 continua abe
 ## Encerramento
 
 Após a coleta, a instância deve ser interrompida para evitar custos de computação.
+
+## Atualização final — integração KMS de laboratório
+
+- Cliente oficial `kmstool-enclave-cli` compilado no host.
+- `vsock-proxy` ativo para `kms.us-east-1.amazonaws.com:443`.
+- Chave `cofrefd-lab-t003` usada exclusivamente com dados sintéticos.
+- `GenerateDataKey` executado com atestação e sem `DEBUG_MODE`, retornando 32 bytes; somente SHA-256 foi reportado.
+- Resultado: `status=ok`, SHA-256 `36c439060d31d5d18ea4ce59973e2bb418687896278d65fb424087a58759f679`.
+- Enclave encerrado com `describe-enclaves: []`.
+- Evidências `32` a `35` copiadas e validadas localmente.
+
+Esta integração é exclusivamente sintética e não fecha a T003 nem o Gate 0. Permanecem pendentes TPM/measured boot, mTLS, descarte, auditoria independente e equivalência produtiva.

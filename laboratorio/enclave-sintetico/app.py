@@ -7,6 +7,10 @@ from __future__ import annotations
 
 import socket
 import base64
+import hashlib
+import json
+import os
+import subprocess
 from typing import Iterable, Optional
 
 from nsm_client import NSMUnavailable, attestation_summary, get_attestation_document
@@ -32,10 +36,22 @@ class VsockReporter:
             self._socket = socket.socket(vsock_family, socket.SOCK_STREAM)
             self._socket.settimeout(3)
             self._socket.connect((PARENT_CID, PARENT_PORT))
-            challenge = self._socket.recv(128).decode("ascii").strip()
-            if not challenge.startswith("NONCE "):
+            challenge = self._socket.recv(8192).decode("ascii").splitlines()
+            nonce_line = next((line for line in challenge if line.startswith("NONCE ")), "")
+            if not nonce_line:
                 raise OSError("invalid parent challenge")
-            self.nonce = bytes.fromhex(challenge.split(" ", 1)[1])
+            self.nonce = bytes.fromhex(nonce_line.split(" ", 1)[1])
+            credentials_line = next(
+                (line for line in challenge if line.startswith("KMS_CREDENTIALS ")), ""
+            )
+            self.kms_credentials = None
+            if credentials_line and credentials_line != "KMS_CREDENTIALS unavailable":
+                encoded = credentials_line.split(" ", 1)[1]
+                self.kms_credentials = json.loads(
+                    base64.b64decode(encoded, validate=True).decode("ascii")
+                )
+            key_line = next((line for line in challenge if line.startswith("KMS_KEY_ID ")), "")
+            self.kms_key_id = key_line.split(" ", 1)[1].strip() if key_line else None
         except OSError:
             self._socket = None
             self.nonce = None
@@ -88,6 +104,66 @@ def probe_attestation(report: VsockReporter) -> None:
         report.send(f"ATTESTATION_DOCUMENT indisponivel; error={type(error).__name__}")
 
 
+def probe_kms_generate_data_key(report: VsockReporter) -> None:
+    """Run only the synthetic KMS GenerateDataKey check when credentials arrive."""
+    credentials = getattr(report, "kms_credentials", None)
+    key_id = getattr(report, "kms_key_id", None)
+    if not credentials or not key_id:
+        report.send("KMS_GENERATE_DATA_KEY skipped=inputs_not_provided")
+        return
+
+    try:
+        command = [
+            "/app/kmstool_enclave_cli",
+            "genkey",
+            "--region", os.environ.get("AWS_REGION", "us-east-1"),
+            "--proxy-port", "8000",
+            "--aws-access-key-id", credentials["AccessKeyId"],
+            "--aws-secret-access-key", credentials["SecretAccessKey"],
+            "--aws-session-token", credentials["Token"],
+            "--key-id", key_id,
+            "--key-spec", "AES-256",
+        ]
+        result = subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+            env={**os.environ, "LD_LIBRARY_PATH": "/app"},
+            timeout=15,
+        )
+        encoded = next(
+            line.split(":", 1)[1].strip()
+            for line in result.stdout.splitlines()
+            if line.startswith("PLAINTEXT:")
+        )
+        plaintext = base64.b64decode(encoded, validate=True)
+        report.send(
+            "KMS_GENERATE_DATA_KEY "
+            f"status=ok bytes={len(plaintext)} "
+            f"sha256={hashlib.sha256(plaintext).hexdigest()}"
+        )
+    except (KeyError, OSError, subprocess.SubprocessError, ValueError, StopIteration) as error:
+        if isinstance(error, subprocess.CalledProcessError):
+            stderr = (error.stderr or "").lower()
+            if "accessdenied" in stderr or "access denied" in stderr:
+                category = "access_denied"
+            elif "credential" in stderr or "security token" in stderr:
+                category = "credentials"
+            elif "proxy" in stderr or "connection" in stderr or "tls" in stderr:
+                category = "connectivity"
+            elif "nsm" in stderr or "attestation" in stderr:
+                category = "attestation"
+            else:
+                category = "tool_error"
+            report.send(
+                f"KMS_GENERATE_DATA_KEY status=failed error=CalledProcessError "
+                f"category={category} returncode={error.returncode}"
+            )
+        else:
+            report.send(f"KMS_GENERATE_DATA_KEY status=failed error={type(error).__name__}")
+
+
 def main() -> None:
     report = VsockReporter()
     try:
@@ -95,6 +171,7 @@ def main() -> None:
         probe_dns(report)
         probe_tcp(report, TARGETS)
         probe_attestation(report)
+        probe_kms_generate_data_key(report)
         report.send("ENCLAVE_PROBE_DONE")
     finally:
         report.close()

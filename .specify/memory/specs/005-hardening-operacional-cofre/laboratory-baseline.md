@@ -158,3 +158,16 @@ Conclusão: a geração e a validação criptográfica de laboratório foram com
 - Evidências `27` a `31` preservadas e validadas localmente.
 
 O resultado comprova atestação criptográfica do EIF assinado no laboratório. Não autoriza KMS, produção ou fechamento do Gate 0.
+
+## 14. Integração KMS atestada — 19/09/2026
+
+- `vsock-proxy` ativo para `kms.us-east-1.amazonaws.com:443`.
+- `kmstool-enclave-cli` compilado a partir do AWS Nitro Enclaves SDK-C.
+- Chave de laboratório `cofrefd-lab-t003`, restrita ao role do parent e aos PCRs finais.
+- `GenerateDataKey` executado com atestação e sem `DEBUG_MODE`.
+- Resultado sanitizado: `status=ok`, 32 bytes, SHA-256 `36c439060d31d5d18ea4ce59973e2bb418687896278d65fb424087a58759f679`.
+- Nenhum plaintext, credencial ou dado real foi registrado no host.
+- `describe-enclaves` retornou `[]` após a execução.
+- Evidências `32` a `35` preservadas e validadas localmente.
+
+Limite: a autorização KMS foi comprovada somente no laboratório sintético. Não comprova mTLS, descarte, auditoria produtiva, TPM/measured boot ou prontidão de produção.

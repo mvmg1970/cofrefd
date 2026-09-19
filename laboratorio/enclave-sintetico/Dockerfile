@@ -5,7 +5,7 @@ RUN dnf install -y python3 python3-pip && dnf clean all
 RUN python3 -m pip install --no-cache-dir --disable-pip-version-check cbor2==5.6.5 cryptography==43.0.3
 
 WORKDIR /app
-COPY app.py nsm_client.py attestation_verifier.py /app/
+COPY app.py nsm_client.py attestation_verifier.py kmstool_enclave_cli libnsm.so /app/
 
 USER 1000:1000
 ENTRYPOINT ["python3", "/app/app.py"]

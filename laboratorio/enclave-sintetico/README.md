@@ -23,3 +23,15 @@ local do documento; o conteúdo assinado não é enviado nem persistido pelo
 probe. A ausência de `/dev/nsm` fora de um enclave é esperada.
 
 O build local não comprova o funcionamento do Nitro Enclave. A validação somente ocorre na EC2 aprovada.
+
+## KMS de laboratório
+
+O ciclo KMS usa o `kmstool-enclave-cli` oficial do AWS Nitro Enclaves SDK-C,
+compilado no host Linux e copiado para este diretório como `kmstool_enclave_cli`
+e `libnsm.so` antes do build do Docker. O parent entrega ao enclave somente
+credenciais temporárias da role da instância e o ARN da chave de laboratório.
+
+O probe chama `GenerateDataKey` com atestação. O plaintext nunca é enviado ao
+parent: somente tamanho e SHA-256 são reportados. A política KMS deve restringir
+o role e os PCRs do EIF assinado final. A chave, o certificado e as credenciais
+são exclusivos do laboratório e não podem ser reutilizados em produção.

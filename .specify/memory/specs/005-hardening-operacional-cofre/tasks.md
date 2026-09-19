@@ -239,3 +239,12 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - `IsSigned: true`, `SignatureCheck: true`, `CheckCRC: true` e `describe-enclaves: []`.
 - Evidências `27-enclave-signed-attestation-output.txt` a `31-signed-attestation-after.txt` íntegras.
 - **Resultado:** atestação assinada de laboratório comprovada; KMS, mTLS, descarte e produção permanecem pendentes.
+
+### T003 — integração KMS atestada de 19/09/2026
+
+- Cliente oficial `kmstool-enclave-cli` compilado no host de laboratório.
+- `vsock-proxy` ativo para o endpoint KMS regional.
+- Chave `cofrefd-lab-t003` restringida aos PCRs finais do EIF assinado.
+- `GenerateDataKey` executado com atestação, sem `DEBUG_MODE`, retornando 32 bytes; somente o SHA-256 foi reportado.
+- Evidências `32` a `35` preservadas e validadas localmente; `describe-enclaves` retornou `[]`.
+- **Resultado:** autorização KMS atestada comprovada no laboratório sintético; TPM/measured boot, mTLS, descarte, auditoria independente e equivalência produtiva continuam pendentes.
