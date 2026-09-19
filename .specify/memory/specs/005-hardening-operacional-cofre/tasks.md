@@ -199,3 +199,4 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Enclave encerrado com `nitro-cli describe-enclaves: []`.
 - Evidências `09-enclave-vsock-output.txt` a `12-enclave-after.txt` e hashes validados localmente.
 - **Limite:** EIF não assinado (`IsSigned: false`); KMS, PCR8, atestação externa e produção continuam fora do escopo.
+- Nota SDD do desvio metodológico e ações corretivas registrada em `planejamento/NOTA-SDD-PROBE-VSOCK-19-09-26.md`.
