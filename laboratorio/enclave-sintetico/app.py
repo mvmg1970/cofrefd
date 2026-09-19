@@ -22,8 +22,11 @@ PARENT_PORT = 5000
 class VsockReporter:
     def __init__(self) -> None:
         self._socket: Optional[socket.socket] = None
+        vsock_family = getattr(socket, "AF_VSOCK", None)
+        if vsock_family is None:
+            return
         try:
-            self._socket = socket.socket(socket.AF_VSOCK, socket.SOCK_STREAM)
+            self._socket = socket.socket(vsock_family, socket.SOCK_STREAM)
             self._socket.settimeout(3)
             self._socket.connect((PARENT_CID, PARENT_PORT))
         except OSError:
