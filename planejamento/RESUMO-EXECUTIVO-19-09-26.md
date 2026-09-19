@@ -8,6 +8,8 @@ A saída do enclave foi recebida pelo host via vsock. As tentativas de DNS, HTTP
 
 O EIF foi assinado com certificado ECDSA de laboratório. O `describe-eif` confirmou `IsSigned: true`, `SignatureCheck: true`, `CheckCRC: true` e PCR8 não zerado. O EIF assinado foi executado sem `DEBUG_MODE`, repetiu os bloqueios de rede e encerrou corretamente. As evidências foram copiadas para o ambiente local e todos os hashes dos artefatos assinados foram validados. O ciclo continua classificado como sintético e não produtivo.
 
+A verificação complementar não encontrou `/dev/tpm*`, serviços TPM, event log TPM/EFI ou suporte de measured boot; o kernel registrou `No TPM chip found`. Essa limitação foi preservada na evidência 17 e confirmada por hash.
+
 ## Limites
 
 Não houve integração KMS, validação de atestação externa, mTLS, descarte operacional ou revisão independente. A assinatura usada é somente de laboratório e não representa uma cadeia produtiva. A T003 permanece pendente e o Gate 0 continua aberto.

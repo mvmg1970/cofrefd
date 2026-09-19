@@ -209,3 +209,10 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Enclave encerrado com `nitro-cli describe-enclaves: []`.
 - Evidências `13-enclave-signed-vsock-output.txt` a `16-enclave-signed-after.txt` e hashes validados localmente.
 - **Limite:** a assinatura é apenas de laboratório; KMS, atestação externa, mTLS, descarte e produção continuam fora do escopo.
+
+### T003 — verificação de TPM e measured boot de 19/09/2026
+
+- Nenhum `/dev/tpm*`, serviço TPM ou event log TPM/EFI foi encontrado.
+- O kernel registrou `No TPM chip found, activating TPM-bypass!`.
+- Evidência `17-tpm-measured-boot.txt` preservada e validada com SHA-256 `28a5632e770626c3e37817f0c86b0786085b47b5c93a86295b79764420d42322`.
+- **Resultado:** TPM/measured boot não comprovados neste host; T003 permanece pendente.

@@ -23,6 +23,7 @@ Executar o primeiro ciclo do artefato sintético do enclave sem `DEBUG_MODE`, co
 - `describe-eif` confirmou `IsSigned: true`, `SignatureCheck: true`, `CheckCRC: true` e PCR8 não zerado.
 - O ciclo assinado repetiu os bloqueios de DNS, HTTP, HTTPS e IMDS; `describe-enclaves` retornou `[]`.
 - Evidências `13` a `16` foram copiadas para o ambiente local e tiveram integridade validada.
+- Verificação do host não encontrou dispositivo TPM, serviço TPM ou event log de measured boot; a evidência `17` foi preservada e validada por hash.
 
 ## Resultado
 
@@ -34,6 +35,7 @@ O ciclo comprovou o funcionamento sintético do EIF sem modo debug, a comunicaç
 - integrar KMS de laboratório sem exportação;
 - validar mTLS, persistência, descarte e auditoria;
 - revisão independente final.
+- TPM/measured boot não disponíveis neste host de laboratório.
 
 A T003 permanece pendente. Não foram usados dados reais e o Gate 0 continua aberto.
 

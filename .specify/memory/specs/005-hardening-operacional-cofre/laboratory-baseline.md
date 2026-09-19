@@ -118,3 +118,13 @@ Essa execução comprova um teste sintético de isolamento de rede e ciclo de vi
 - Evidências `13` a `16` e `SHA256SUMS.txt` foram preservadas e validadas localmente.
 
 O certificado é exclusivamente de laboratório, com validade curta, e não comprova atestação aceita por KMS, custódia produtiva, mTLS, descarte ou equivalência produtiva.
+
+## 10. Verificação de TPM e measured boot — 19/09/2026
+
+- Nenhum dispositivo `/dev/tpm*` foi encontrado.
+- Nenhum serviço TPM ou measured boot foi identificado.
+- Não foram encontrados logs de eventos TPM/EFI.
+- O kernel registrou `No TPM chip found, activating TPM-bypass!`.
+- A evidência foi preservada em `17-tpm-measured-boot.txt` com SHA-256 `28a5632e770626c3e37817f0c86b0786085b47b5c93a86295b79764420d42322`.
+
+Conclusão: a presença e a medição por TPM não foram comprovadas neste host de laboratório; o item permanece pendente.
