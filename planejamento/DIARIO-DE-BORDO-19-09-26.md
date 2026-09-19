@@ -28,6 +28,8 @@ Executar o primeiro ciclo do artefato sintético do enclave sem `DEBUG_MODE`, co
 - Documento de atestação gerado com 4460 bytes; evidências `18` a `21` foram preservadas e validadas.
 - Fluxo completo executado com nonce do parent; verificador confirmou assinatura COSE, cadeia Nitro, raiz AWS, nonce de 32 bytes e PCR0–PCR2.
 - Evidências `22` a `26` foram preservadas e todos os hashes do pacote foram validados localmente.
+- EIF assinado repetiu a atestação com PCR8; assinatura COSE, cadeia Nitro, raiz AWS, nonce e PCR0–PCR2/PCR8 foram validados.
+- Evidências `27` a `31` foram preservadas e validadas localmente.
 
 ## Resultado
 

@@ -149,3 +149,12 @@ Limite: a geração foi comprovada, mas a cadeia de confiança do documento não
 - Evidência de verificação: `22-attestation-verification.json`; pacote `T003-evidence-2026-09-19-attestation-verified.tar.gz`.
 
 Conclusão: a geração e a validação criptográfica de laboratório foram comprovadas. KMS, mTLS, descarte e equivalência produtiva continuam pendentes.
+
+## 13. Validação do EIF assinado — 19/09/2026
+
+- EIF assinado com certificado ECDSA temporário de laboratório.
+- `IsSigned: true`, `SignatureCheck: true` e `CheckCRC: true`.
+- Verificador confirmou assinatura COSE, cadeia Nitro, raiz AWS, nonce de 32 bytes e PCR0–PCR2/PCR8.
+- Evidências `27` a `31` preservadas e validadas localmente.
+
+O resultado comprova atestação criptográfica do EIF assinado no laboratório. Não autoriza KMS, produção ou fechamento do Gate 0.

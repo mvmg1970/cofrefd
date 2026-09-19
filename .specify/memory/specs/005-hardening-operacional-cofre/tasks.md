@@ -231,3 +231,11 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Verificador confirmou assinatura COSE, cadeia Nitro, raiz AWS, nonce e PCR0–PCR2.
 - Resultado salvo em `22-attestation-verification.json`; evidências `23` a `26` e hashes foram validados localmente.
 - **Resultado:** atestação criptográfica de laboratório comprovada; KMS, mTLS, descarte e produção permanecem fora do escopo.
+
+### T003 — atestação do EIF assinado de 19/09/2026
+
+- EIF assinado executado sem `DEBUG_MODE`.
+- Verificador confirmou assinatura COSE, cadeia Nitro, raiz AWS, nonce de 32 bytes e PCR0–PCR2/PCR8.
+- `IsSigned: true`, `SignatureCheck: true`, `CheckCRC: true` e `describe-enclaves: []`.
+- Evidências `27-enclave-signed-attestation-output.txt` a `31-signed-attestation-after.txt` íntegras.
+- **Resultado:** atestação assinada de laboratório comprovada; KMS, mTLS, descarte e produção permanecem pendentes.

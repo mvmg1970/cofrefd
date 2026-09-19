@@ -14,6 +14,8 @@ O probe foi atualizado para solicitar um attestation document ao NSM dentro do e
 
 Em seguida, o fluxo completo foi executado com nonce gerado pelo parent. O verificador offline confirmou assinatura COSE, cadeia de certificados Nitro, fingerprint da raiz AWS, nonce de 32 bytes e correspondência dos PCR0–PCR2. O resultado foi preservado em `22-attestation-verification.json`; todos os hashes do pacote atualizado foram validados localmente.
 
+O mesmo fluxo foi repetido com o EIF assinado. O verificador confirmou também PCR8, além de `IsSigned: true`, `SignatureCheck: true` e `CheckCRC: true`. As evidências 27–31 foram validadas localmente.
+
 ## Limites
 
 Não houve integração KMS, mTLS, descarte operacional ou revisão independente. A assinatura do EIF continua sendo somente de laboratório e não representa uma cadeia produtiva. A T003 permanece pendente e o Gate 0 continua aberto.
