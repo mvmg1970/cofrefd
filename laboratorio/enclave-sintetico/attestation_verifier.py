@@ -35,7 +35,15 @@ def verify(document: bytes, expected_pcrs: dict[str, str], expected_nonce: bytes
     body = cbor2.loads(payload)
     leaf = x509.load_der_x509_certificate(body["certificate"])
     bundle = [x509.load_der_x509_certificate(cert) for cert in body.get("cabundle", [])]
-    chain = [leaf, *bundle]
+    by_subject = {cert.subject.rfc4514_string(): cert for cert in bundle}
+    chain = [leaf]
+    while chain[-1].issuer != chain[-1].subject:
+        issuer = by_subject.get(chain[-1].issuer.rfc4514_string())
+        if issuer is None:
+            raise ValueError("certificate issuer missing from CA bundle")
+        chain.append(issuer)
+        if len(chain) > len(bundle) + 2:
+            raise ValueError("certificate chain loop")
 
     for certificate in chain:
         now = dt.datetime.now(dt.timezone.utc)
@@ -44,7 +52,7 @@ def verify(document: bytes, expected_pcrs: dict[str, str], expected_nonce: bytes
     for child, issuer in zip(chain, chain[1:]):
         _verify_cert_signature(child, issuer)
 
-    root_hash = hashlib.sha256(bundle[-1].public_bytes(serialization.Encoding.DER)).hexdigest()
+    root_hash = hashlib.sha256(chain[-1].public_bytes(serialization.Encoding.DER)).hexdigest()
     if root_hash != AWS_NITRO_ROOT_SHA256:
         raise ValueError(f"unexpected Nitro root fingerprint: {root_hash}")
 
