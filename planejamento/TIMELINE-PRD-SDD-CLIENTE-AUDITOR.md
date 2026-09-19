@@ -162,3 +162,9 @@ Foi executado um ciclo controlado de evidências na instância AWS `cofre-lab-pa
 Os artefatos foram preservados localmente e a integridade dos relatórios e capturas foi verificada por hashes. A instância foi interrompida ao final do ciclo.
 
 Este ciclo não comprovou TPM/measured boot, egress direto do enclave, atestação sem `DEBUG_MODE`, integração KMS, mTLS ou descarte operacional. A T003 permanece pendente, o laboratório continua sintético e o Gate 0 permanece aberto.
+
+## Atualização de 19/09/2026 — probe sem debug e vsock
+
+Foi construído e executado um EIF sintético sem `DEBUG_MODE`. O probe comunicou sua saída ao host por vsock e registrou bloqueio de DNS, HTTP, HTTPS e IMDS dentro do enclave. PCR0, PCR1 e PCR2 foram preservados, o enclave encerrou corretamente e os hashes foram validados.
+
+O EIF permanece sem assinatura (`IsSigned: false`), sem integração KMS e sem atestação externa. A T003 continua pendente e o Gate 0 permanece aberto.

@@ -190,3 +190,12 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - Integridade dos relatórios e capturas validada em `SHA256SUMS-ALL.txt`.
 - Instância interrompida ao final da coleta para evitar custos de computação.
 - **Status:** permanece pendente; ainda faltam TPM/measured boot, teste direto de egress do enclave, atestação sem `DEBUG_MODE`, integração KMS e revisão manual final.
+
+### T003 — ciclo de enclave via vsock de 19/09/2026
+
+- Probe sintético construído em EIF com imagem base fixada por digest.
+- EIF executado sem `--debug-mode`, com PCR0, PCR1 e PCR2 não zerados.
+- Saída recebida via vsock; DNS, HTTP, HTTPS e IMDS foram bloqueados dentro do enclave.
+- Enclave encerrado com `nitro-cli describe-enclaves: []`.
+- Evidências `09-enclave-vsock-output.txt` a `12-enclave-after.txt` e hashes validados localmente.
+- **Limite:** EIF não assinado (`IsSigned: false`); KMS, PCR8, atestação externa e produção continuam fora do escopo.

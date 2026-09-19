@@ -1,6 +1,6 @@
 # Plano do Artefato Sintético do Enclave — T003
 
-**Data:** 2026-09-18
+**Data:** 2026-09-19
 **Classificação:** laboratório sintético; não produtivo
 
 ## Objetivo
@@ -40,3 +40,7 @@ Construir na EC2 um artefato `.eif` reproduzível, sem `DEBUG_MODE`, para permit
 ## Critério de saída
 
 O artefato somente será considerado pronto para a próxima etapa quando houver código, build reproduzível, hash, PCRs, execução sem debug, testes negativos de rede e evidência versionada. Isso não equivalerá a produção nem fechará o Gate 0.
+
+## Resultado do ciclo de 19/09/2026
+
+O probe foi construído, executado sem `DEBUG_MODE` e recebeu saída via vsock. As tentativas de DNS, HTTP, HTTPS e metadata falharam dentro do enclave, conforme esperado para a política de isolamento. O EIF não foi assinado e nenhuma operação KMS foi executada.

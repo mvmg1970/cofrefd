@@ -91,3 +91,18 @@ Os relatórios e capturas estão em `evidencias/T003/`, incluindo `SHA256SUMS.tx
 - integração com KMS, mTLS, descarte operacional e equivalência produtiva continuam pendentes.
 
 Classificação do ciclo: **laboratório sintético; evidência operacional parcial; não produtivo**.
+
+## 8. Atualização de evidências — 19/09/2026
+
+Foi construído e executado um probe sintético dentro de um EIF sem `DEBUG_MODE`.
+
+- Imagem base Amazon Linux fixada pelo digest `sha256:74c545e3e04db388b00bd31d7cc5640d4e9c12058a6d72af938d113da3c82893`.
+- EIF criado com Nitro CLI `1.5.0`, `CheckCRC: true` e `IsSigned: false`.
+- PCR0, PCR1 e PCR2 foram registrados e não estão zerados.
+- O enclave foi executado com 2 CPUs e 1024 MiB alocados.
+- A saída foi recebida pelo host via vsock, sem uso do console debug.
+- DNS, HTTP, HTTPS e acesso ao endpoint IMDS foram bloqueados dentro do enclave.
+- O enclave terminou e `nitro-cli describe-enclaves` retornou `[]`.
+- Evidências `09` a `12` e seus hashes foram preservadas em `evidencias/T003/`.
+
+Essa execução comprova um teste sintético de isolamento de rede e ciclo de vida. Não comprova assinatura do EIF, atestação aceita por KMS, custódia de chaves, mTLS ou equivalência produtiva.
