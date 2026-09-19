@@ -24,6 +24,8 @@ Executar o primeiro ciclo do artefato sintético do enclave sem `DEBUG_MODE`, co
 - O ciclo assinado repetiu os bloqueios de DNS, HTTP, HTTPS e IMDS; `describe-enclaves` retornou `[]`.
 - Evidências `13` a `16` foram copiadas para o ambiente local e tiveram integridade validada.
 - Verificação do host não encontrou dispositivo TPM, serviço TPM ou event log de measured boot; a evidência `17` foi preservada e validada por hash.
+- Probe atualizado solicitou attestation document ao NSM dentro do enclave e reportou somente tamanho e SHA-256 sanitizados.
+- Documento de atestação gerado com 4460 bytes; evidências `18` a `21` foram preservadas e validadas.
 
 ## Resultado
 
@@ -36,6 +38,7 @@ O ciclo comprovou o funcionamento sintético do EIF sem modo debug, a comunicaç
 - validar mTLS, persistência, descarte e auditoria;
 - revisão independente final.
 - TPM/measured boot não disponíveis neste host de laboratório.
+- Validação externa da assinatura do documento e autorização por KMS ainda não foram executadas.
 
 A T003 permanece pendente. Não foram usados dados reais e o Gate 0 continua aberto.
 

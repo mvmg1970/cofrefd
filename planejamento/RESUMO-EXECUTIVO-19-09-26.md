@@ -10,6 +10,8 @@ O EIF foi assinado com certificado ECDSA de laboratório. O `describe-eif` confi
 
 A verificação complementar não encontrou `/dev/tpm*`, serviços TPM, event log TPM/EFI ou suporte de measured boot; o kernel registrou `No TPM chip found`. Essa limitação foi preservada na evidência 17 e confirmada por hash.
 
+O probe foi atualizado para solicitar um attestation document ao NSM dentro do enclave. O host recebeu somente tamanho e SHA-256 sanitizados do documento, que teve 4460 bytes. As evidências 18–21 foram validadas localmente. Isso comprova a geração do documento pelo NSM, mas não sua validação externa nem autorização por KMS.
+
 ## Limites
 
 Não houve integração KMS, validação de atestação externa, mTLS, descarte operacional ou revisão independente. A assinatura usada é somente de laboratório e não representa uma cadeia produtiva. A T003 permanece pendente e o Gate 0 continua aberto.

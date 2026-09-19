@@ -216,3 +216,11 @@ Uma tarefa somente poderá ser marcada como concluída quando possuir implementa
 - O kernel registrou `No TPM chip found, activating TPM-bypass!`.
 - Evidência `17-tpm-measured-boot.txt` preservada e validada com SHA-256 `28a5632e770626c3e37817f0c86b0786085b47b5c93a86295b79764420d42322`.
 - **Resultado:** TPM/measured boot não comprovados neste host; T003 permanece pendente.
+
+### T003 — geração de attestation document de 19/09/2026
+
+- Probe atualizado solicitou attestation document ao NSM dentro do enclave.
+- Documento retornado: 4460 bytes; SHA-256 sanitizado `c06b94519cb1e960c3569d88066a4391423c86a7c40cdc5795aae4c05d6a2aff`.
+- Saída externa permaneceu sanitizada; o conteúdo assinado não foi enviado ao host.
+- Evidências `18-enclave-attestation-output.txt` a `21-enclave-attestation-after.txt` foram validadas localmente.
+- **Limite:** geração comprovada; validação externa da cadeia Nitro, integração KMS e autorização criptográfica continuam pendentes.

@@ -128,3 +128,13 @@ O certificado é exclusivamente de laboratório, com validade curta, e não comp
 - A evidência foi preservada em `17-tpm-measured-boot.txt` com SHA-256 `28a5632e770626c3e37817f0c86b0786085b47b5c93a86295b79764420d42322`.
 
 Conclusão: a presença e a medição por TPM não foram comprovadas neste host de laboratório; o item permanece pendente.
+
+## 11. Geração de attestation document — 19/09/2026
+
+- O probe atualizado solicitou o documento ao NSM a partir de dentro do enclave.
+- O documento retornado teve 4460 bytes e SHA-256 sanitizado `c06b94519cb1e960c3569d88066a4391423c86a7c40cdc5795aae4c05d6a2aff`.
+- O conteúdo do documento não foi enviado ao host nem persistido pelo probe.
+- O EIF executou sem `DEBUG_MODE`, com rede externa bloqueada e `describe-enclaves: []`.
+- Evidências `18` a `21` foram preservadas e validadas localmente.
+
+Limite: a geração foi comprovada, mas a cadeia de confiança do documento não foi validada por um verificador externo e nenhuma decisão KMS foi executada.
