@@ -62,3 +62,8 @@ Após a coleta, a instância deve ser interrompida para evitar custos de computa
 - Evidências `32` a `35` copiadas e validadas localmente.
 
 Esta integração é exclusivamente sintética e não fecha a T003 nem o Gate 0. Permanecem pendentes TPM/measured boot, mTLS, descarte, auditoria independente e equivalência produtiva.
+
+## Revisão manual
+
+- Artefatos `32` a `35` revisados manualmente pelo responsável em 19/09/2026.
+- Integridade, resultado KMS, PCRs, assinatura do EIF e encerramento do enclave confirmados.

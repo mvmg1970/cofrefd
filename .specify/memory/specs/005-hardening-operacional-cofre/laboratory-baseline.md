@@ -171,3 +171,5 @@ O resultado comprova atestação criptográfica do EIF assinado no laboratório.
 - Evidências `32` a `35` preservadas e validadas localmente.
 
 Limite: a autorização KMS foi comprovada somente no laboratório sintético. Não comprova mTLS, descarte, auditoria produtiva, TPM/measured boot ou prontidão de produção.
+
+Revisão manual dos artefatos `32` a `35` concluída pelo responsável; integridade e interpretação dos resultados confirmadas.

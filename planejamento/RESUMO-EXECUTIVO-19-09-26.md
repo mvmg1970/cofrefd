@@ -29,3 +29,5 @@ Concluir o registro documental do ciclo assinado, depois interromper a instânci
 O cliente oficial `kmstool-enclave-cli` foi compilado no host e o `vsock-proxy` foi usado para uma operação KMS atestada. A chave `cofrefd-lab-t003` foi restringida aos PCRs finais do EIF. `GenerateDataKey` retornou 32 bytes; o plaintext não foi exportado nem registrado, somente seu SHA-256 foi reportado. As evidências `32`–`35` foram copiadas e validadas localmente, e o enclave terminou com `describe-enclaves: []`.
 
 A integração KMS é exclusivamente de laboratório, com chave e certificado temporários. A T003 permanece pendente; TPM/measured boot, mTLS, descarte, auditoria independente e equivalência produtiva continuam fora do escopo comprovado.
+
+A revisão manual dos artefatos `32`–`35` foi concluída pelo responsável, confirmando integridade, PCRs, assinatura, resultado KMS e encerramento do enclave.
