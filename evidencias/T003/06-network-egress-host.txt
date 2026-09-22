@@ -1,0 +1,20 @@
+=== INTERFACES ===
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens5             UP             172.31.46.2/20 metric 512 fe80::ce3:1aff:fe65:7f81/64 
+docker0          DOWN           172.17.0.1/16 
+=== ROTAS ===
+default via 172.31.32.1 dev ens5 proto dhcp src 172.31.46.2 metric 512 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+172.31.0.2 via 172.31.32.1 dev ens5 proto dhcp src 172.31.46.2 metric 512 
+172.31.32.0/20 dev ens5 proto kernel scope link src 172.31.46.2 metric 512 
+172.31.32.1 dev ens5 proto dhcp scope link src 172.31.46.2 metric 512 
+fe80::/64 dev ens5 proto kernel metric 256 pref medium
+=== DNS ===
+2606:4700:10::6814:179a example.com
+2606:4700:10::ac42:93f3 example.com
+=== HTTPS ===
+HTTPS: HTTP 200
+=== HTTP ===
+HTTP: HTTP 000
+=== IPv6 HTTPS ===
+IPv6: HTTP 000

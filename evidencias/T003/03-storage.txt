@@ -1,0 +1,46 @@
+=== BLOCK DEVICES ===
+NAME          FSTYPE SIZE TYPE MOUNTPOINTS
+nvme0n1               30G disk 
+├─nvme0n1p1   xfs     30G part /
+├─nvme0n1p127          1M part 
+└─nvme0n1p128 vfat    10M part /boot/efi
+=== MOUNTS ===
+TARGET                                                  SOURCE           FSTYPE     OPTIONS
+/                                                       /dev/nvme0n1p1   xfs        rw,noatime,seclabel,inode64,logbufs=8,logbsize=32k,sunit=1024,swidth=1024,noquota
+├─/proc                                                 proc             proc       rw,nosuid,nodev,noexec,relatime
+│ └─/proc/sys/fs/binfmt_misc                            systemd-1        autofs     rw,relatime,fd=33,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=3409
+├─/sys                                                  sysfs            sysfs      rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/kernel/security                                securityfs       securityfs rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/cgroup                                      cgroup2          cgroup2    rw,nosuid,nodev,noexec,relatime,seclabel,nsdelegate,memory_recursiveprot
+│ ├─/sys/fs/pstore                                      none             pstore     rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/firmware/efi/efivars                           efivarfs         efivarfs   rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/bpf                                         bpf              bpf        rw,nosuid,nodev,noexec,relatime,mode=700
+│ ├─/sys/fs/selinux                                     selinuxfs        selinuxfs  rw,nosuid,noexec,relatime
+│ ├─/sys/kernel/tracing                                 tracefs          tracefs    rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/kernel/debug                                   debugfs          debugfs    rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/fs/fuse/connections                            fusectl          fusectl    rw,nosuid,nodev,noexec,relatime
+│ └─/sys/kernel/config                                  configfs         configfs   rw,nosuid,nodev,noexec,relatime
+├─/dev                                                  devtmpfs         devtmpfs   rw,nosuid,seclabel,size=4096k,nr_inodes=2011312,mode=755
+│ ├─/dev/shm                                            tmpfs            tmpfs      rw,nosuid,nodev,seclabel
+│ ├─/dev/pts                                            devpts           devpts     rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000
+│ ├─/dev/hugepages                                      hugetlbfs        hugetlbfs  rw,relatime,seclabel,pagesize=2M
+│ └─/dev/mqueue                                         mqueue           mqueue     rw,nosuid,nodev,noexec,relatime,seclabel
+├─/run                                                  tmpfs            tmpfs      rw,nosuid,nodev,seclabel,size=3233284k,nr_inodes=819200,mode=755
+│ ├─/run/credentials/systemd-sysctl.service             ramfs            ramfs      ro,nosuid,nodev,noexec,relatime,seclabel,mode=700
+│ ├─/run/credentials/systemd-tmpfiles-setup-dev.service ramfs            ramfs      ro,nosuid,nodev,noexec,relatime,seclabel,mode=700
+│ ├─/run/credentials/systemd-tmpfiles-setup.service     ramfs            ramfs      ro,nosuid,nodev,noexec,relatime,seclabel,mode=700
+│ └─/run/user/0                                         tmpfs            tmpfs      rw,nosuid,nodev,relatime,seclabel,size=1616640k,nr_inodes=404160,mode=700
+├─/tmp                                                  tmpfs            tmpfs      rw,nosuid,nodev,seclabel,nr_inodes=1048576
+├─/boot/efi                                             systemd-1        autofs     rw,relatime,fd=48,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=1774
+│ └─/boot/efi                                           /dev/nvme0n1p128 vfat       rw,noatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=winnt,errors=remount-ro
+└─/var/lib/nfs/rpc_pipefs                               sunrpc           rpc_pipefs rw,relatime
+=== FILESYSTEMS ===
+Filesystem       Type      Size  Used Avail Use% Mounted on
+devtmpfs         devtmpfs  4.0M     0  4.0M   0% /dev
+tmpfs            tmpfs     7.8G     0  7.8G   0% /dev/shm
+tmpfs            tmpfs     3.1G  504K  3.1G   1% /run
+efivarfs         efivarfs  128K  2.7K  121K   3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1   xfs        30G  2.3G   28G   8% /
+tmpfs            tmpfs     7.8G     0  7.8G   0% /tmp
+/dev/nvme0n1p128 vfat       10M  1.3M  8.7M  13% /boot/efi
+tmpfs            tmpfs     1.6G     0  1.6G   0% /run/user/0

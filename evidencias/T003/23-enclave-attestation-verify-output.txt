@@ -1,0 +1,11 @@
+VSOCK_RECEIVER_LISTENING port=5000
+VSOCK_RECEIVER_CONNECTED cid=20
+ENCLAVE_PROBE classification=laboratorio-sintetico debug=false
+DNS example.com: bloqueado/indisponivel; error=OSError
+TCP example.com:80: bloqueado/indisponivel; error=OSError
+TCP example.com:443: bloqueado/indisponivel; error=OSError
+TCP 169.254.169.254:80: bloqueado/indisponivel; error=OSError
+ATTESTATION_DOCUMENT length=4491 sha256=5445964b5569d7ffacd78dbeab40d68f5a8f4c5efb706d89916bdded3d78c8d9
+ATTESTATION_DOCUMENT_RECEIVED file=/tmp/attestation-document.cbor.b64
+ENCLAVE_PROBE_DONE
+VSOCK_RECEIVER_DONE

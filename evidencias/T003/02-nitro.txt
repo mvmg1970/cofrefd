@@ -1,0 +1,7 @@
+=== NITRO CLI ===
+Nitro CLI 1.5.0
+=== ALLOCATOR ===
+active
+enabled
+=== ENCLAVES ATIVOS ===
+[]

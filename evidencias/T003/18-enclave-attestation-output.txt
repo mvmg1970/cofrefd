@@ -1,0 +1,11 @@
+nohup: ignoring input
+VSOCK_RECEIVER_LISTENING port=5000
+VSOCK_RECEIVER_CONNECTED cid=19
+ENCLAVE_PROBE classification=laboratorio-sintetico debug=false
+DNS example.com: bloqueado/indisponivel; error=OSError
+TCP example.com:80: bloqueado/indisponivel; error=OSError
+TCP example.com:443: bloqueado/indisponivel; error=OSError
+TCP 169.254.169.254:80: bloqueado/indisponivel; error=OSError
+ATTESTATION_DOCUMENT length=4460 sha256=c06b94519cb1e960c3569d88066a4391423c86a7c40cdc5795aae4c05d6a2aff
+ENCLAVE_PROBE_DONE
+VSOCK_RECEIVER_DONE

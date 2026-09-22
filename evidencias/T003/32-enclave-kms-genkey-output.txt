@@ -1,0 +1,12 @@
+VSOCK_RECEIVER_LISTENING port=5000
+VSOCK_RECEIVER_CONNECTED cid=23
+ENCLAVE_PROBE classification=laboratorio-sintetico debug=false
+DNS example.com: bloqueado/indisponivel; error=OSError
+TCP example.com:80: bloqueado/indisponivel; error=OSError
+TCP example.com:443: bloqueado/indisponivel; error=OSError
+TCP 169.254.169.254:80: bloqueado/indisponivel; error=OSError
+ATTESTATION_DOCUMENT length=4492 sha256=3ffb3d5917c540cb4ad057a303d61494a344d5c538a4269bfeb796a284bd14d9
+ATTESTATION_DOCUMENT_RECEIVED file=/tmp/attestation-document.cbor.b64
+KMS_GENERATE_DATA_KEY status=ok bytes=32 sha256=36c439060d31d5d18ea4ce59973e2bb418687896278d65fb424087a58759f679
+ENCLAVE_PROBE_DONE
+VSOCK_RECEIVER_DONE

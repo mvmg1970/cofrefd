@@ -1,0 +1,90 @@
+{
+  "EifVersion": 4,
+  "Measurements": {
+    "HashAlgorithm": "Sha512_48 { .. }",
+    "PCR0": "30fab2c19e67866808859ae118b76647b9521b75b24e27553e9015cb115ec376a9fdb48a93e29eb7bd071daf4e7679c5",
+    "PCR1": "4b4d5b3661b3efc12920900c80e126e4ce783c522de6c02a2a5bf7af3a2b9327b86776f188e4be1c1c404a129dbda493",
+    "PCR2": "ee67ffcb6ab33b75e6cfaa0482787aa009e35e2fe6354f2231b7dbdecb77e71f05a87d5e3c468d7e4ed1598a9b9724d8",
+    "PCR8": "34e156e4b227467fe45744a3bc0e52bd3ad3446ab3b872325407d973598f64d5c489fea4dac193bad66b52724c85feb2"
+  },
+  "IsSigned": true,
+  "SigningCertificate": {
+    "IssuerName": {
+      "commonName": "cofrefd-lab-enclave",
+      "organizationName": "CofreFD",
+      "organizationalUnitName": "Laboratorio"
+    },
+    "Algorithm": "ecdsa-with-SHA384",
+    "NotBefore": "Sep 19 13:31:05 2026 GMT",
+    "NotAfter": "Sep 26 13:31:05 2026 GMT",
+    "Signature": "30:65:02:31:00:94:A4:95:83:97:69:BB:D1:9B:B3:C9:15:AC:AA:AF:80:50:6E:08:09:FC:BE:0B:3D:36:DF:32:4A:36:65:BB:77:CF:0C:5B:3B:B8:1D:98:47:9C:C8:86:DC:FF:1F:69:86:02:30:42:3F:32:73:BE:79:10:2B:E4:49:0E:39:83:06:61:4B:4A:4B:2D:31:2A:D0:BA:AC:0E:15:48:0D:E5:42:8E:FF:60:4F:4F:88:44:55:2E:CF:A2:46:87:90:0E:62:59:73"
+  },
+  "CheckCRC": true,
+  "SignatureCheck": true,
+  "ImageName": "cofrefd/enclave-probe",
+  "ImageVersion": "e522598b973230f9b2b407dd1526bbd53dc181b9225213171bf9e4f2e81f7b7e",
+  "Metadata": {
+    "BuildTime": "2026-09-19T19:08:12.630380474+00:00",
+    "BuildTool": "nitro-cli",
+    "BuildToolVersion": "1.5.0",
+    "OperatingSystem": "Linux",
+    "KernelVersion": "4.14.256",
+    "DockerInfo": {
+      "Architecture": "amd64",
+      "Author": "",
+      "Comment": "buildkit.dockerfile.v0",
+      "Config": {
+        "AttachStderr": false,
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "Domainname": "",
+        "Entrypoint": [
+          "python3",
+          "/app/app.py"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        ],
+        "Hostname": "",
+        "Image": "",
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Tty": false,
+        "User": "1000:1000",
+        "WorkingDir": "/app"
+      },
+      "Created": "2026-09-19T19:08:03.795077723Z",
+      "DockerVersion": "",
+      "GraphDriver": {
+        "Data": {
+          "LowerDir": "/var/lib/docker/overlay2/nvvcgpgru2l7stvhpzriiz68y/diff:/var/lib/docker/overlay2/zl4pbfw9wt1fkc4hhwb2dw3pj/diff:/var/lib/docker/overlay2/mlx5ej8fvg9o7fr0zmyzxopmt/diff:/var/lib/docker/overlay2/881b5eb914d3fa4c4f3e4319974dc5114ca7e93e8b13bb71260a12f3a84a49e2/diff",
+          "MergedDir": "/var/lib/docker/overlay2/8p9s46qrvyzsrprsgygo97wzh/merged",
+          "UpperDir": "/var/lib/docker/overlay2/8p9s46qrvyzsrprsgygo97wzh/diff",
+          "WorkDir": "/var/lib/docker/overlay2/8p9s46qrvyzsrprsgygo97wzh/work"
+        },
+        "Name": "overlay2"
+      },
+      "Id": "sha256:e522598b973230f9b2b407dd1526bbd53dc181b9225213171bf9e4f2e81f7b7e",
+      "Metadata": {
+        "LastTagTime": "2026-09-19T19:08:04.016347002Z"
+      },
+      "Os": "linux",
+      "Parent": "",
+      "RepoDigests": [],
+      "RepoTags": [
+        "cofrefd/enclave-probe:20260919-attestation-verify"
+      ],
+      "RootFS": {
+        "Layers": [
+          "sha256:f418d27cfefd10338ef4d16042de5a666f23f719661e6b335fdac4623b547938",
+          "sha256:784be68f097fd146e206a37e7a78f452883a7f70f628f844fa870ec2ece54f54",
+          "sha256:79689085537a7ed3f159ddcd7a2fcbaa0b456c2ed57d02c36c47bc95e90cac4d",
+          "sha256:eebc910fbcf15807952d39ca7f2ea512a27cac844df66104d7b2f5d1a733c60c",
+          "sha256:690ac2b0d77a547f182c24cbd28e5804f49563af72b60d888a52ae058fdfc28d"
+        ],
+        "Type": "layers"
+      },
+      "Size": 166357750
+    }
+  }
+}

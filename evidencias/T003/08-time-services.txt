@@ -1,0 +1,78 @@
+=== HORARIO ===
+               Local time: Fri 2026-09-18 15:24:14 UTC
+           Universal time: Fri 2026-09-18 15:24:14 UTC
+                 RTC time: Fri 2026-09-18 15:24:13
+                Time zone: n/a (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+=== CHRONY ===
+active
+Reference ID    : A9FEA97B (169.254.169.123)
+Stratum         : 4
+Ref time (UTC)  : Fri Sep 18 15:24:08 2026
+System time     : 0.000001369 seconds fast of NTP time
+Last offset     : +0.000004353 seconds
+RMS offset      : 0.000005672 seconds
+Frequency       : 12.621 ppm slow
+Residual freq   : -0.000 ppm
+Skew            : 0.107 ppm
+Root delay      : 0.000418123 seconds
+Root dispersion : 0.000171448 seconds
+Update interval : 16.3 seconds
+Leap status     : Normal
+=== ALLOCATOR LOG ===
+Sep 15 18:09:42 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[28748]: Done.
+Sep 15 18:09:42 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[28748]: Auto-generated the enclave CPU pool: 1,3.
+Sep 15 18:09:42 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[28748]: Configuring the enclave CPU pool...
+Sep 15 18:09:42 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[28748]: Done.
+Sep 15 18:09:42 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[28748]: Successfully allocated Nitro Enclaves resources: 512 MiB, 2 CPUs
+Sep 15 18:09:42 ip-172-31-46-2.ec2.internal systemd[1]: Finished nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator.
+-- Boot 1ababfedfb534f8d9b3c87b1b9483b89 --
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal systemd[1]: Starting nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator...
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Auto-generating the enclave CPU pool by using the CPU count...
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Will try to reserve 512 MB of memory on node 0.
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Configuring the huge page memory...
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: - Reserved 256 pages of type: 2048kB.
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Done.
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Auto-generated the enclave CPU pool: 1,3.
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Configuring the enclave CPU pool...
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Done.
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Successfully allocated Nitro Enclaves resources: 512 MiB, 2 CPUs
+Sep 15 18:52:36 ip-172-31-46-2.ec2.internal systemd[1]: Finished nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator.
+-- Boot 254d7617739b4af99f2c6b370fedd5c3 --
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal systemd[1]: Starting nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator...
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Auto-generating the enclave CPU pool by using the CPU count...
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Will try to reserve 512 MB of memory on node 0.
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Configuring the huge page memory...
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: - Reserved 256 pages of type: 2048kB.
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Done.
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Auto-generated the enclave CPU pool: 1,3.
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Configuring the enclave CPU pool...
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Done.
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2059]: Successfully allocated Nitro Enclaves resources: 512 MiB, 2 CPUs
+Sep 15 19:05:20 ip-172-31-46-2.ec2.internal systemd[1]: Finished nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator.
+-- Boot 7f0f56307c184330bee880a8cba0133d --
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal systemd[1]: Starting nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator...
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Auto-generating the enclave CPU pool by using the CPU count...
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Will try to reserve 512 MB of memory on node 0.
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Configuring the huge page memory...
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: - Reserved 256 pages of type: 2048kB.
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Done.
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Auto-generated the enclave CPU pool: 1,3.
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Configuring the enclave CPU pool...
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Done.
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2066]: Successfully allocated Nitro Enclaves resources: 512 MiB, 2 CPUs
+Sep 17 13:14:33 ip-172-31-46-2.ec2.internal systemd[1]: Finished nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator.
+-- Boot fe8953cc335446b48510d996e897e499 --
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal systemd[1]: Starting nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator...
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Auto-generating the enclave CPU pool by using the CPU count...
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Will try to reserve 512 MB of memory on node 0.
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Configuring the huge page memory...
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: - Reserved 256 pages of type: 2048kB.
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Done.
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Auto-generated the enclave CPU pool: 1,3.
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Configuring the enclave CPU pool...
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Done.
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal nitro-enclaves-allocator[2057]: Successfully allocated Nitro Enclaves resources: 512 MiB, 2 CPUs
+Sep 18 12:54:55 ip-172-31-46-2.ec2.internal systemd[1]: Finished nitro-enclaves-allocator.service - Nitro Enclaves Resource Allocator.

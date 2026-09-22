@@ -1,0 +1,24 @@
+=== FIREWALL FINAL ===
+Fri Sep 18 15:22:03 UTC 2026
+table inet cofre_host {
+	chain input { # handle 1
+		type filter hook input priority filter; policy drop;
+		iifname "lo" accept # handle 3
+		ct state established,related accept # handle 4
+		ip protocol icmp accept # handle 6
+		ip6 nexthdr ipv6-icmp accept # handle 7
+		ip protocol udp udp sport 67 udp dport 68 accept # handle 8
+		ip6 nexthdr udp udp sport 547 udp dport 546 accept # handle 9
+		iifname "lo" accept # handle 41
+		ct state established,related accept # handle 42
+		ip saddr 187.101.209.237 tcp dport 22 accept # handle 43
+		ip protocol icmp accept # handle 44
+		ip6 nexthdr ipv6-icmp accept # handle 45
+		ip protocol udp udp sport 67 udp dport 68 accept # handle 46
+		ip6 nexthdr udp udp sport 547 udp dport 546 accept # handle 47
+	}
+}
+=== PERSISTENCIA ===
+enabled
+active
+include "/etc/nftables/cofre_host.nft"
