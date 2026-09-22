@@ -3,6 +3,7 @@ import {
   authorizeServiceConnection,
   type ServiceConnectionRequest,
 } from "../../src/application/identity/service-identity";
+import { CertificateRegistry } from "../../src/application/identity/certificate-registry";
 
 const request = (overrides: Partial<ServiceConnectionRequest> = {}): ServiceConnectionRequest => ({
   caller: {
@@ -50,5 +51,27 @@ describe("service identity and mTLS policy", () => {
     expect(authorizeServiceConnection(request({
       presentedCertificateFingerprint: "cert-other-service",
     }))).toEqual({ allowed: false, reason: "certificate-identity-mismatch" });
+  });
+
+  it("rotates a certificate while preserving the service identity", () => {
+    const registry = new CertificateRegistry();
+    registry.register("gateway-01", "cert-gateway-old");
+
+    expect(registry.rotate("gateway-01", "cert-gateway-new")).toEqual({
+      serviceId: "gateway-01",
+      activeFingerprint: "cert-gateway-new",
+      previousFingerprint: "cert-gateway-old",
+    });
+    expect(registry.isActive("gateway-01", "cert-gateway-old")).toBe(false);
+    expect(registry.isActive("gateway-01", "cert-gateway-new")).toBe(true);
+  });
+
+  it("revokes a certificate and rejects it thereafter", () => {
+    const registry = new CertificateRegistry();
+    registry.register("gateway-01", "cert-gateway-01");
+
+    registry.revoke("gateway-01", "cert-gateway-01");
+
+    expect(registry.isActive("gateway-01", "cert-gateway-01")).toBe(false);
   });
 });
