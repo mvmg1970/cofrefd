@@ -24,6 +24,16 @@ export type ServiceConnectionDecision = Readonly<{
     | "certificate-identity-mismatch";
 }>;
 
+export type ServicePeerRequest = Readonly<{
+  callerRole: ServiceRole;
+  targetRole: ServiceRole;
+}>;
+
+export type ServicePeerDecision = Readonly<{
+  allowed: boolean;
+  reason: "peer-authorized" | "peer-not-authorized";
+}>;
+
 export function authorizeServiceConnection(
   input: ServiceConnectionRequest,
 ): ServiceConnectionDecision {
@@ -40,4 +50,11 @@ export function authorizeServiceConnection(
   }
 
   return { allowed: true, reason: "connection-authorized" };
+}
+
+export function authorizeServicePeer(input: ServicePeerRequest): ServicePeerDecision {
+  const explicitlyTrusted = input.callerRole === "gateway" && input.targetRole === "custody";
+  return explicitlyTrusted
+    ? { allowed: true, reason: "peer-authorized" }
+    : { allowed: false, reason: "peer-not-authorized" };
 }

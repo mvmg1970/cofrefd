@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   authorizeServiceConnection,
+  authorizeServicePeer,
   type ServiceConnectionRequest,
+  type ServicePeerRequest,
 } from "../../src/application/identity/service-identity";
 import { CertificateRegistry } from "../../src/application/identity/certificate-registry";
 
@@ -73,5 +75,32 @@ describe("service identity and mTLS policy", () => {
     registry.revoke("gateway-01", "cert-gateway-01");
 
     expect(registry.isActive("gateway-01", "cert-gateway-01")).toBe(false);
+  });
+
+  it("allows only an explicitly trusted service pair", () => {
+    const trusted: ServicePeerRequest = {
+      callerRole: "gateway",
+      targetRole: "custody",
+    };
+    const untrusted: ServicePeerRequest = {
+      callerRole: "curator",
+      targetRole: "executor",
+    };
+
+    expect(authorizeServicePeer(trusted)).toEqual({
+      allowed: true,
+      reason: "peer-authorized",
+    });
+    expect(authorizeServicePeer(untrusted)).toEqual({
+      allowed: false,
+      reason: "peer-not-authorized",
+    });
+  });
+
+  it("rejects an unknown target role", () => {
+    expect(authorizeServicePeer({
+      callerRole: "gateway",
+      targetRole: "administrator",
+    })).toEqual({ allowed: false, reason: "peer-not-authorized" });
   });
 });
