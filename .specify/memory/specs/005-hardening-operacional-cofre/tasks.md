@@ -34,10 +34,11 @@
 
 ## Fase 1 — identidade, mTLS e custódia
 
-- [ ] **T004** Implementar identidades separadas por serviço e certificados mTLS de laboratório.
+- [x] **T004** Implementar identidades separadas por serviço e certificados mTLS de laboratório.
   **Rastreia:** FR-002, FR-009, DT-007.
   **Depende de:** T002, T003.
-  **Evidência:** teste de autenticação, rotação, revogação e abuso entre papéis.
+  **Evidência:** testes de autenticação, rotação, revogação, abuso entre papéis e handshake mTLS real; commits `41486cd`, `7b368ac`, `920fca0`, `89b4829` e `bb011e5`.
+  **Ressalva:** concluída em laboratório sintético; não equivale a mTLS produtivo nem fecha o Gate 0.
 
 - [ ] **T005** Implementar emulador KMS/HSM provider-neutral sem exportação de chaves privadas.
   **Rastreia:** FR-001, FR-002, DT-003.
