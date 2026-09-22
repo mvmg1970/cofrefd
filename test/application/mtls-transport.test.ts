@@ -1,8 +1,10 @@
 import { connect } from "node:tls";
 import type { AddressInfo } from "node:net";
 import { readFileSync } from "node:fs";
+import { X509Certificate } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { createMutualTlsServer } from "../../src/application/identity/mtls-transport";
+import { CertificateRegistry } from "../../src/application/identity/certificate-registry";
 
 const mtlsDir = process.env.COFREDF_MTLS_DIR;
 
@@ -64,6 +66,58 @@ describe("real mutual TLS transport", () => {
           host: "127.0.0.1",
           port: address.port,
           ca: readCertificate(mtlsDir, "ca.crt"),
+          rejectUnauthorized: true,
+          servername: "localhost",
+        });
+        let body = "";
+        let settled = false;
+        const finish = () => {
+          if (!settled) {
+            settled = true;
+            resolve(body);
+          }
+        };
+        socket.on("data", (chunk) => { body += chunk.toString(); });
+        socket.on("error", finish);
+        socket.on("end", finish);
+        socket.on("close", finish);
+      });
+
+      expect(response).toBe("");
+    } finally {
+      await new Promise<void>((resolve) => server.close(() => resolve()));
+    }
+  });
+
+  it("rejects a revoked client certificate", async () => {
+    if (!mtlsDir) throw new Error("COFREDF_MTLS_DIR is required");
+
+    const clientCertificate = new X509Certificate(readCertificate(mtlsDir, "client.crt"));
+    const registry = new CertificateRegistry();
+    registry.register("cofre-gateway", clientCertificate.fingerprint256);
+    registry.revoke("cofre-gateway", clientCertificate.fingerprint256);
+
+    const server = createMutualTlsServer({
+      keyPath: `${mtlsDir}/server.key`,
+      certificatePath: `${mtlsDir}/server.crt`,
+      caPath: `${mtlsDir}/ca.crt`,
+      certificateRegistry: registry,
+      clientServiceId: "cofre-gateway",
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      server.listen(0, "127.0.0.1", resolve).once("error", reject);
+    });
+
+    try {
+      const address = server.address() as AddressInfo;
+      const response = await new Promise<string>((resolve) => {
+        const socket = connect({
+          host: "127.0.0.1",
+          port: address.port,
+          ca: readCertificate(mtlsDir, "ca.crt"),
+          cert: readCertificate(mtlsDir, "client.crt"),
+          key: readCertificate(mtlsDir, "client.key"),
           rejectUnauthorized: true,
           servername: "localhost",
         });
