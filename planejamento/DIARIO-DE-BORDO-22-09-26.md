@@ -2,7 +2,7 @@
 
 ## Objetivo do dia
 
-Recuperar e versionar as evidências do laboratório T003, avançar a T004 com mTLS de laboratório e preparar a próxima etapa para comprovar NitroTPM/measured boot.
+Recuperar e versionar as evidências do laboratório T003, consolidar a T004 com mTLS de laboratório e executar o teste controlado de NitroTPM/measured boot.
 
 ## Atividades realizadas
 
@@ -21,13 +21,30 @@ Recuperar e versionar as evidências do laboratório T003, avançar a T004 com m
 - T004 registrada como concluída em laboratório, com ressalva explícita de não equivalência produtiva.
 - Commits T004 publicados na branch remota até `8c2a8cf`.
 
+## Teste NitroTPM executado
+
+- Confirmado que `m5.xlarge` suporta NitroTPM 2.0 e UEFI.
+- Criado snapshot criptografado de 30 GiB: `snap-04572f2ba72800623`.
+- Registrada AMI de laboratório com `BootMode=uefi` e `TpmSupport=v2.0`: `ami-083aa23f3fb2ac60a`.
+- Criada a instância temporária `i-0f0ba023ac3b575ba` com Nitro Enclaves habilitado.
+- Confirmados `/dev/tpm0`, `/dev/tpmrm0`, tabela ACPI `AMZNTPM2` e `TPMEventLog`.
+- Instalados `aws-nitro-tpm-tools`, `systemd-boot-unsigned` e `tpm2-tools`.
+- Gerado atestado NitroTPM CBOR de 4.900 bytes; hash inicial: `a1aefbe65e4a8c7a4d7c401f22bf3df3b80864cef6632a68305b3bb60199d281`.
+- Gerado UKI em laboratório com seções `.osrel`, `.cmdline`, `.linux` e `.initrd`; tamanho 37.606.111 bytes; hash: `f2a8e427040eefff6d35518d5a2cb0d0f3836f97b9bc0b927918357cf9c0e203`.
+- PCRs esperados calculados pelo UKI: PCR4 `8f2789...db14fe7`, PCR7 `98441c...7af35`, PCR12 zerado.
+- PCRs reais no boot GRUB: PCR4 `40811F...6401D`, PCR7 coincidente, PCR12 zerado.
+- Tentativa de boot único pelo GRUB/custom.cfg deixou a instância temporariamente sem reachability; a instância foi recuperada por stop/start e voltou saudável.
+- O boot real voltou ao kernel separado `/boot/vmlinuz-6.18.44-99.149.amzn2023.x86_64`; portanto o PCR4 do UKI não foi comprovado no boot real.
+- Entrada experimental e UKI foram desativados sem apagar os artefatos; evidência final foi empacotada, transferida, validada por SHA-256 e publicada no commit `888532f`.
+- Instância de teste foi parada após a coleta.
+
 ## Estado atual
 
-O fluxo mTLS possui evidência sintética reproduzível. A T003 permanece aberta porque o host usado no laboratório não comprovou TPM/measured boot, e ainda faltam evidências operacionais de descarte, auditoria e equivalência produtiva.
+O fluxo mTLS possui evidência sintética reproduzível. O NitroTPM está presente e emite atestação, mas a T003 permanece aberta porque o measured boot do UKI não foi comprovado no boot real: PCR4 divergiu do valor esperado. Também faltam evidências operacionais de descarte, auditoria e equivalência produtiva.
 
 ## Próximo ciclo
 
-Verificar no AWS CloudShell se o tipo `m5.xlarge` suporta NitroTPM e se a AMI atual possui `TpmSupport=v2.0` e boot UEFI. Para Linux, a AMI precisa ser preparada e registrada com NitroTPM; não basta trocar o tipo da instância.
+Definir uma estratégia suportada para gerar uma AMI Linux attestable com UKI como artefato de boot primário, sem depender de um chainload experimental pelo GRUB. Repetir o teste somente quando houver procedimento de recuperação por console e evidência de que o kernel inicializado é o UKI calculado.
 
 ## Limites e governança
 
