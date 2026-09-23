@@ -1,0 +1,7 @@
+menuentry "COFREDF T003 UKI NitroTPM" {
+  insmod part_gpt
+  insmod ext2
+  search --no-floppy --fs-uuid --set=root bb1da0c1-2cbf-492f-911c-93fd0083b4a4
+  chainloader /boot/cofre-t003-uki.efi
+  boot
+}
