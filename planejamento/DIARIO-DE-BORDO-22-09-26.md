@@ -53,3 +53,16 @@ Definir uma estratégia suportada para gerar uma AMI Linux attestable com UKI co
 - O laboratório não é ambiente de produção.
 - O Gate 0 continua aberto.
 - Qualquer novo gasto AWS deve ser limitado a uma instância/AMI de laboratório, com desligamento após a coleta.
+
+## Ponto de parada — retomada amanhã
+
+- Último commit publicado na branch `feat/t004-mtls-laboratorio`: `777b4ce`.
+- Repositório local estava limpo após o push.
+- Instância NitroTPM de teste `i-0f0ba023ac3b575ba` foi parada; não inicializar a instância antiga `cofre-lab-parent-001`.
+- A instância de teste comprovou NitroTPM 2.0, atestação CBOR e leitura de PCRs.
+- O UKI foi gerado, mas o boot real pelo `custom.cfg` experimental não completou; a instância foi recuperada e voltou ao kernel GRUB original.
+- PCR7 e PCR12 coincidiram; PCR4 divergiu do valor esperado do UKI.
+- A entrada experimental e o UKI foram desativados, preservando os artefatos com sufixo `.failed-t003`.
+- Evidências finais foram commitadas no `888532f`; documentação atualizada no `0dfc637`; prompt completo publicado no `777b4ce`.
+- Próximo passo: definir uma estratégia suportada para uma AMI/UKI attestable com caminho de boot verificável e recuperação por console, antes de repetir qualquer reboot.
+- Não marcar T003 como concluída até PCR4 do boot real coincidir com a referência do UKI e os gates operacionais restantes terem evidência.
