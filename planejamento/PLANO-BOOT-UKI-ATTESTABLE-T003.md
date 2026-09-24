@@ -35,6 +35,34 @@ atalho.
 
 ## AMI, sistema operacional e método de boot
 
+### Decisão aprovada
+
+O método escolhido é o fluxo oficial de **Attestable AMI para Amazon Linux
+2023**, usando uma imagem construída com UKI como artefato de boot primário.
+Durante a construção, a referência de medições será gerada pelo utilitário
+oficial:
+
+```bash
+/usr/bin/nitro-tpm-pcr-compute --image <UKI.efi>
+```
+
+Esse fluxo será preferido a uma instalação manual do UKI sobre uma AMI
+existente, porque a imagem de exemplo da AWS concentra a configuração de
+UEFI, UKI e ferramentas de cálculo das medições em um procedimento
+reproduzível. A documentação oficial também define o UKI como requisito para
+Standard boot em UEFI.
+
+Referências de implementação:
+
+- [Compute PCR measurements for a custom AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-pcr-compute.html)
+- [Attestable AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attestable-ami.html)
+- [NitroTPM attestation document contents](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm-attestation-document-content.html)
+
+Antes de qualquer lançamento AWS, deve-se localizar e estudar a imagem de
+exemplo do AL2023, reproduzir sua construção em ambiente de laboratório e
+confirmar que o UKI final, os PCRs calculados e o caminho de recuperação
+atendem aos gates deste plano.
+
 ### Requisitos da imagem
 
 Preparar uma nova AMI de laboratório com:
