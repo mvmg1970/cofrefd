@@ -66,3 +66,16 @@ Definir uma estratégia suportada para gerar uma AMI Linux attestable com UKI co
 - Evidências finais foram commitadas no `888532f`; documentação atualizada no `0dfc637`; prompt completo publicado no `777b4ce`.
 - Próximo passo: definir uma estratégia suportada para uma AMI/UKI attestable com caminho de boot verificável e recuperação por console, antes de repetir qualquer reboot.
 - Não marcar T003 como concluída até PCR4 do boot real coincidir com a referência do UKI e os gates operacionais restantes terem evidência.
+
+## Fechamento técnico T003 — AMI Attestable com UKI
+
+- Receita final corrigida em `laboratorio/cofre-t003-attestable-ssm-recipe`, com scripts normalizados para LF e canal temporário SSM habilitado.
+- AMI validada: `ami-0d9bc6f8c9e7a3969` (`uefi`, `TpmSupport=v2.0`).
+- UKI inicializado como artefato primário: `/boot/efi/EFI/BOOT/BOOTX64.EFI`.
+- Hash SHA-384 do UKI coletado no boot: `4eb6605a9cd0032ea7aae000f961049e404477499ec11563399f3f370e48665742d67a7297cc110fa0bd9bd47c8d7f0d`.
+- PCR4 calculado/tagueado e PCR4 real da atestação NitroTPM coincidiram: `f3c4cb2167c5e7a9c0b6fca5f09ec75958dcaf97b9d3c0823bb56f14b477afcad34e28114b55c817ef5ca08489aa235c`.
+- PCR7 calculado/tagueado e PCR7 real também coincidiram: `98441c7f7625d10058c47683aec486ce311c633235eb555593a7ee791121e3578ae72d04ecef661f272d59058b77af35`.
+- A atestação foi coletada com nonce fresco de 32 bytes e o documento CBOR retornou o mesmo nonce.
+- Instância de validação `i-0ec43c7a25ded2d5f` foi parada após a coleta; AMI, snapshots e logs foram preservados.
+- O Image Builder marcou a execução como `FAILED` porque o workflow rejeitou o AMI ID retornado com quebra de linha, embora a AMI tenha sido criada, esteja `available` e contenha as tags PCR. Esse defeito operacional não invalida a comparação PCR4 real versus calculado, mas deve ser corrigido antes de automatizar o fluxo.
+- Critério técnico principal do T003: **atendido**. Nenhum `custom.cfg` ou chainload experimental foi usado neste fechamento.
